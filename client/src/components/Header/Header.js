@@ -22,6 +22,14 @@ const Header = () => {
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="signup">
+          
+        <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/communityforum">
+                Community Forum
+              </a>
+            </li>
+          </ul>
           <ul class="navbar-nav" style={{ marginLeft: 'auto' }}>
             <li class="nav-item">
               <a class="nav-link" href="/signin">
