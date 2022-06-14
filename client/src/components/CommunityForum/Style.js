@@ -23,10 +23,17 @@ const useStyles = makeStyles({
     display:"flex",
     justifyContent:"center",
   },
-  button:{
-    backgroundColor:"#a6dced"
+  // button:{
+  //   backgroundColor:"#a6dced"
 
-  },
+  // },
+  
+  button: {
+    backgroundColor: '#979AA1',
+    '&:hover': {
+      backgroundColor: '#6c757d',
+  }},
+
   filter:{
     // display:"flex",
     position:"absolute",

@@ -61,7 +61,9 @@ function Posts() {
           {/* <Button variant="contained" className={classes.button}>
                   Create
                 </Button> */}
-          <Button variant="contained" onClick={handleClickOpen} >
+          <Button sx={{marginBottom: "10px",backgroundColor: '#979AA1','&:hover': {
+      backgroundColor: '#6c757d',
+  }}} variant="contained" onClick={handleClickOpen} >
             Create
           </Button>
           {/* Referenced from: https://mui.com/material-ui/react-dialog/ */}

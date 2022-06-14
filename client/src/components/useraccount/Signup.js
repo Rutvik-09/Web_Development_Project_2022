@@ -3,9 +3,18 @@ import rentimage from "../../assets/images/HomeGlobeIcon.jpg";
 import {  Link } from 'react-router-dom';
 import { Formik,Form } from "formik";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   
+  const navigate = useNavigate();
+
+
+  //Get form values once form is submitted
+const signupForm = (formValues) => {
+  console.log("form values are "+formValues);
+  navigate("/signin");
+};
   return (
   //Formik is a library used for form validation  https://formik.org/
     <Formik
@@ -187,10 +196,7 @@ const SignupFormValidation = Yup.object().shape({
 });
 
 
-//Get form values once form is submitted
-const signupForm = (formValues) => {
-  console.log(formValues);
-};
+
 
 
 export default Signup;
