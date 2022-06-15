@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Posts from "./components/CommunityForum/Posts";
+import Profile from "./components/useraccount/Profile";
 
 function App() {  
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/signin" element={<Signin />}></Route>
             <Route path="/forgetpswd" element={<Forgetpswd />}></Route>
             <Route path="/communityforum" element={<Posts />}></Route>
+            <Route path="/userprofile" element={<Profile />}></Route>
           </Routes>
         </BrowserRouter>
       </div>
