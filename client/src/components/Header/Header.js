@@ -27,6 +27,11 @@ const Header = () => {
               Community Forum
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/productpage">
+              Reviews
+            </a>
+          </li>
         </ul>
         <ul class="navbar-nav" style={{ marginLeft: "auto" }}>
           <li class="nav-item">
@@ -49,9 +54,16 @@ const Header = () => {
               aria-haspopup="true"
               aria-expanded="true"
             >
-              <img src={user} alt="user profile pic" className="user-profile-pic" />
+              <img
+                src={user}
+                alt="user profile pic"
+                className="user-profile-pic"
+              />
             </a>
-            <div class="dropdown-menu custom-css" aria-labelledby="navbarDropdown">
+            <div
+              class="dropdown-menu custom-css"
+              aria-labelledby="navbarDropdown"
+            >
               <a class="dropdown-item" href="/userprofile">
                 Profile
               </a>
