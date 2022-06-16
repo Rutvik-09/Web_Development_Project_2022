@@ -51,6 +51,16 @@ const Header = (props) => {
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="/editproduct">
+              Edit Product
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/deleteproduct">
+              Delete Product
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="/createcoupon">
               Create Coupon
             </a>

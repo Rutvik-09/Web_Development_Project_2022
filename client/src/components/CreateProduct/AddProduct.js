@@ -34,6 +34,9 @@ function AddProduct() {
 
   const handleChange = (event) => {
     setCategory(event.target.value);
+  };
+
+  const handleChangeCoupon = (event) => {
     setCoupon(event.target.value);
   };
 
@@ -55,10 +58,10 @@ function AddProduct() {
       address.length > 0 &&
       (security_deposit > 0) & (available > 0)
     ) {
-      navigate("/products");
-      // setSnackbarMessage("Equipment Added Successfully!!");
+      setSnackbarMessage("Equipment Added Successfully!!");
       setSeverity("success");
       setOpen(true);
+      navigate("/products");
     } else {
       setSnackbarMessage("Please fill all the required fields");
       setSeverity("error");
@@ -88,7 +91,7 @@ function AddProduct() {
             </Grid>
 
             <Grid item container spacing={2} justifyContent="center">
-              <Grid item xs={12} md={4}>
+              <Grid item xs={10} md={4}>
                 <TextField
                   fullwidth
                   id="outlined-basic"
@@ -101,7 +104,7 @@ function AddProduct() {
                 />
               </Grid>
 
-              <Grid item xs={12} md={4}>
+              <Grid item xs={10} md={4}>
                 <FormControl sx={{ width: "100%" }} required>
                   <InputLabel id="demo-simple-select-label">
                     Category
@@ -132,36 +135,42 @@ function AddProduct() {
                 </FormControl>
               </Grid>
             </Grid>
-            <Grid item xs={12} md={12} style={{ width: "67%" }}>
-              <Button
-                fullWidth
-                className="uploadImage"
-                variant="outlined"
-                onChange={onImageChange}
-                accept="image"
-                value={image}
-              >
-                {" "}
-                <input type="file" required />{" "}
-              </Button>
-            </Grid>
-            <Grid item xs={12} style={{ width: "67%" }}>
-              <TextField
-                fullWidth
-                variant="outlined"
-                label="Description"
-                value={description}
-                multiline
-                aria-label="minimum height"
-                minRows={4}
-                placeholder="Enter Description"
-                // sx={{ width: 500 }}
-                onChange={(e) => setDescription(e.target.value)}
-                required
-              />
-            </Grid>
+
             <Grid item container spacing={2} justifyContent="center">
-              <Grid item xs={12} md={4}>
+              <Grid item xs={10} md={8}>
+                <Button
+                  fullWidth
+                  className="uploadImage"
+                  variant="outlined"
+                  onChange={onImageChange}
+                  accept="image"
+                  value={image}
+                >
+                  {" "}
+                  <input type="file" required />{" "}
+                </Button>
+              </Grid>
+            </Grid>
+
+            <Grid item container justifyContent="center" spacing={2}>
+              <Grid item xs={10} md={8}>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  label="Description"
+                  value={description}
+                  multiline
+                  aria-label="minimum height"
+                  minRows={4}
+                  placeholder="Enter Description"
+                  onChange={(e) => setDescription(e.target.value)}
+                  required
+                />
+              </Grid>
+            </Grid>
+
+            <Grid item container spacing={2} justifyContent="center">
+              <Grid item xs={10} md={4}>
                 <TextField
                   fullWidth
                   variant="outlined"
@@ -174,7 +183,7 @@ function AddProduct() {
                 />
               </Grid>
 
-              <Grid item xs={12} md={4}>
+              <Grid item xs={10} md={4}>
                 <TextField
                   fullWidth
                   variant="outlined"
@@ -187,27 +196,31 @@ function AddProduct() {
                 />
               </Grid>
             </Grid>
-            <Grid item xs={12} style={{ width: "67%" }}>
-              <TextField
-                fullWidth
-                variant="outlined"
-                label="Address"
-                value={address}
-                multiline
-                aria-label="minimum height"
-                minRows={4}
-                placeholder="Enter Address"
-                onChange={(e) => setAddress(e.target.value)}
-                required
-              />
-            </Grid>
-            <Grid item container spacing={2} justifyContent="center">
-              <Grid item sx={12} md={4}>
+
+            <Grid item container justifyContent="center" spacing={2}>
+              <Grid item xs={10} md={8}>
                 <TextField
                   fullWidth
                   variant="outlined"
+                  label="Address"
+                  value={address}
+                  multiline
+                  aria-label="minimum height"
+                  minRows={4}
+                  placeholder="Enter Address"
+                  onChange={(e) => setAddress(e.target.value)}
+                  required
+                />
+              </Grid>
+            </Grid>
+
+            <Grid item container spacing={2} justifyContent="center">
+              <Grid item xs={10} md={4}>
+                <TextField
+                  variant="outlined"
                   label="Security Deposit"
                   value={security_deposit}
+                  min="0"
                   inputProps={{ type: "number" }}
                   sx={{
                     width: "100%",
@@ -218,43 +231,47 @@ function AddProduct() {
                 />
               </Grid>
 
-              <Grid item sx={12} md={4}>
+              <Grid item xs={10} md={4}>
                 <TextField
-                  fullWidth
                   variant="outlined"
                   label="Available for"
                   value={available}
                   inputProps={{ type: "number" }}
+                  pattern="^[1-9]\d*$"
+                  min="1"
                   sx={{
                     width: "100%",
-                    pattern: "[0-9]",
                   }}
                   onChange={(e) => setAvailableFor(e.target.value)}
                   required
                 />
               </Grid>
             </Grid>
-            <Grid item xs={12} md={10} style={{ width: "67%" }}>
-              <FormControl fullWidth required>
-                <InputLabel id="demo-simple-select-label">Coupon</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={coupon}
-                  label="Coupon"
-                  onChange={handleChange}
-                >
-                  <MenuItem value={"Percent-off coupon"}>
-                    Percent-off Coupon
-                  </MenuItem>
-                  <MenuItem value={"Free gift with rent"}>
-                    Free Gift with Rent
-                  </MenuItem>
-                  <MenuItem value={"BOGO coupon"}>BOGO Coupon</MenuItem>
-                  <MenuItem value={"Mystery deals"}>Mystery deals</MenuItem>
-                </Select>
-              </FormControl>
+
+            <Grid item container spacing={2} justifyContent="center">
+              <Grid item xs={10} md={8}>
+                <FormControl sx={{ width: "100%" }}>
+                  <InputLabel id="demo-simple-select-label">Coupon</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={coupon}
+                    label="Coupon"
+                    onChange={handleChangeCoupon}
+                  >
+                    <MenuItem value={"Percent-off coupon"}>
+                      Percent-off Coupon
+                    </MenuItem>
+                    <MenuItem value={"Free gift with rent"}>
+                      Free Gift with Rent
+                    </MenuItem>
+                    <MenuItem value={"BOGO coupon"}>BOGO Coupon</MenuItem>
+                    <MenuItem value={"Mystery deals"}>Mystery deals</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
             </Grid>
+
             <Grid item sx={12} md={8}>
               <Box>
                 <Button
@@ -269,7 +286,7 @@ function AddProduct() {
                     hover: "#6c757d",
                   }}
                 >
-                  Submit
+                  ADD PRODUCT
                 </Button>
               </Box>
             </Grid>

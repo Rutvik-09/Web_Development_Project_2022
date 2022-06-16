@@ -61,7 +61,7 @@ function AddProduct() {
               </Alert>
             </Snackbar>
 
-            <Grid item xs={12} md={5}>
+            <Grid item xs={10} md={5}>
               <Typography
                 variant="h3"
                 component="div"
@@ -73,7 +73,7 @@ function AddProduct() {
             </Grid>
 
             <Grid item container spacing={2} justifyContent="center">
-              <Grid item xs={12} md={4}>
+              <Grid item xs={10} md={4}>
                 <TextField
                   fullWidth
                   id="outlined-basic"
@@ -85,7 +85,7 @@ function AddProduct() {
                 />
               </Grid>
 
-              <Grid item xs={12} md={4}>
+              <Grid item xs={10} md={4}>
                 <FormControl sx={{ width: "100%" }} required>
                   <InputLabel id="demo-simple-select-label">Type</InputLabel>
                   <Select
@@ -108,23 +108,25 @@ function AddProduct() {
               </Grid>
             </Grid>
 
-            <Grid item xs={12} style={{ width: "67%" }}>
-              <TextField
-                fullWidth
-                variant="outlined"
-                label="Description"
-                value={description}
-                multiline
-                aria-label="minimum height"
-                minRows={4}
-                placeholder="Enter Description"
-                onChange={(e) => setDescription(e.target.value)}
-                required
-              />
+            <Grid item container justifyContent="center" spacing={2}>
+              <Grid item xs={10} md={8}>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  label="Description"
+                  value={description}
+                  multiline
+                  aria-label="minimum height"
+                  minRows={4}
+                  placeholder="Enter Description"
+                  onChange={(e) => setDescription(e.target.value)}
+                  required
+                />
+              </Grid>
             </Grid>
 
             <Grid item container spacing={2} justifyContent="center">
-              <Grid item xs={12} md={4}>
+              <Grid item xs={10} md={4}>
                 <TextField
                   fullWidth
                   variant="outlined"
@@ -137,7 +139,7 @@ function AddProduct() {
                 />
               </Grid>
 
-              <Grid item xs={12} md={4}>
+              <Grid item xs={10} md={4}>
                 <TextField
                   fullWidth
                   variant="outlined"
@@ -150,7 +152,7 @@ function AddProduct() {
               </Grid>
             </Grid>
 
-            <Grid item sx={12} md={8}>
+            <Grid item sx={10} md={8}>
               <Box>
                 <Button
                   className="buttonHover"
