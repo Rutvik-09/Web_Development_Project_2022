@@ -126,7 +126,7 @@ function App() {
           </div>
         </BrowserRouter>
 
-      <Footer />
+        <Footer />
     </div>
   );
 }

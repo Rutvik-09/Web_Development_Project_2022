@@ -95,7 +95,7 @@ const Header = (props) => {
               />
             </a>
             <div
-              class="dropdown-menu custom-css"
+              class="dropdown-menu dropdown-menu-md-right"
               aria-labelledby="navbarDropdown"
             >
               <a class="dropdown-item" href="/userprofile">
