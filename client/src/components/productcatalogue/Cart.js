@@ -32,10 +32,22 @@ export default function Cart(props) {
             <div className="row-text">
             <div >{item.name}</div>
            
-              <button   onClick={() => onRemove(item)} className="remove">
+              <button   onClick={() => onRemove(item)}   sx={{
+                backgroundColor: "#979AA1",
+                color: "#FFFFFF",
+                "&:hover": {
+                  backgroundColor: "#6c757d",
+                }
+              }}>
                 -
               </button>
-              <button onClick={() => onAdd(item)} className="add">
+              <button onClick={() => onAdd(item)}  sx={{
+                backgroundColor: "#979AA1",
+                color: "#FFFFFF",
+                "&:hover": {
+                  backgroundColor: "#6c757d",
+                }
+              }}>
                 +
               </button>
            </div>
@@ -64,7 +76,7 @@ export default function Cart(props) {
               </div>
             </div>
 
-            <div className="row-text bgblue" >
+            <div className="row-text" >
               <div className="col-2">
                 <strong>Total Price</strong>
               </div>
@@ -74,7 +86,13 @@ export default function Cart(props) {
             </div>
             <hr />
             <div className="row">
-              <Button variant="contained" className='text-right' onClick={navBill}>
+              <Button sx={{
+                backgroundColor: "#979AA1",
+                color: "#FFFFFF",
+                "&:hover": {
+                  backgroundColor: "#6c757d",
+                }
+              }} className='text-right' onClick={navBill}>
                 Pay ${totalPrice.toFixed(2)}
               </Button>
             </div>

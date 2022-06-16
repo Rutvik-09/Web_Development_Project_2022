@@ -13,6 +13,16 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import useStyles from "./Style";
 import TextField from "@mui/material/TextField";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faDungeon,
+  faEnvelope,
+  faLocationPin,
+  faMessage,
+  faMobilePhone,
+  faMobileScreen,
+} from "@fortawesome/free-solid-svg-icons";
+
 export default function Product(props) {
   const { product, onAdd } = props;
   const classes = useStyles();
@@ -68,7 +78,7 @@ export default function Product(props) {
               gutterBottom
               variant="h5"
               component="div"
-              className="bgblue margin"
+              className="margin"
             >
               {product.name}
             </Typography>
@@ -81,21 +91,33 @@ export default function Product(props) {
             </Typography>
           </CardContent>
         </CardActionArea>
-        
-          
-            <div className={classes.flexMargin}>
-              <div>
-                <Button variant="contained" onClick={() => onAdd(product)}>
-                  Add To Cart
-                </Button>
+
+        <div className={classes.flexMargin}>
+          <div>
+            <Button
+              sx={{
+                backgroundColor: "#979AA1",
+                color: "#FFFFFF",
+                "&:hover": {
+                  backgroundColor: "#6c757d",
+                }
+              }}
+              onClick={() => onAdd(product)}
+            >
+              Add To Cart
+            </Button>
+          </div>
+          <div>
+            <Button onClick={handleClickOpen}>
+              <div  sx={{
+                color: "#979AA1"
+              }}>
+                Please click here to message the owner -
               </div>
-              <div>
-                <Button onClick={handleClickOpen}>
-                  <div className={classes.flex}>
-                    Please click here to message the owner -
-                  </div>
-                  <div className={classes.flex}>
-                    <svg
+              <div  sx={{
+                color: "#979AA1"
+              }}>
+                {/* <svg
                       onClick={handleClickOpen}
                       xmlns="http://www.w3.org/2000/svg"
                       height="24"
@@ -104,13 +126,12 @@ export default function Product(props) {
                     >
                       <path d="M0 0h24v24H0z" fill="none" />
                       <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
-                    </svg>
-                  </div>
-                </Button>
+                    </svg> */}
+                <FontAwesomeIcon icon={faMessage} />
               </div>
-            </div>
-          
-        
+            </Button>
+          </div>
+        </div>
       </Card>
 
       <Dialog open={confirmSend}>

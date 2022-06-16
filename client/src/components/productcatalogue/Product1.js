@@ -34,7 +34,7 @@ export default function Product1(props) {
       <img className="product" src={productdetail.image} alt={productdetail.name}   ></img>
       
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div" className='bgblue margin'>
+        <Typography gutterBottom variant="h5" component="div" className='margin'>
           {productdetail.name}
         </Typography>
         <Typography gutterBottom variant="h5" component="div">
@@ -48,7 +48,13 @@ export default function Product1(props) {
     </CardActionArea>
     <CardActions>
     <Stack spacing={2} direction="row">
-    <Button variant="contained" onClick={() => onAdd(productdetail)}>Add To Cart</Button>
+    <Button  sx={{
+                backgroundColor: "#979AA1",
+                color: "#FFFFFF",
+                "&:hover": {
+                  backgroundColor: "#6c757d",
+                }
+              }} onClick={() => onAdd(productdetail)}>Add To Cart</Button>
   </Stack>
     </CardActions>
   </Card>

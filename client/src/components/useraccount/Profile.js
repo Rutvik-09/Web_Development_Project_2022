@@ -5,6 +5,7 @@ import {
   faDungeon,
   faEnvelope,
   faLocationPin,
+  faMessage,
   faMobilePhone,
   faMobileScreen,
 } from "@fortawesome/free-solid-svg-icons";
@@ -29,6 +30,8 @@ const Profile = () => {
             
               <div class="card-body text-center ">
               <img src={user} alt="avatar" className="rounded-circle img-fluid image-size" />  
+
+              
 
                 {/* <div>
                   <h5 class="my-2">John Smith</h5>
