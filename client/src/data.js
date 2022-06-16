@@ -11,7 +11,7 @@ const data = {
     },
     {
       id: '2',
-      name: 'Friedge',
+      name: 'Fridge',
       price: 50,
       image: "/images/friedge.jpeg",
       description: "it is 36inch Capacity Thru Door Ice DispenserExterior Water DispenserLED LightingFingerprint ResistantStainless Steel colour mainted washing machine having capacity of washing 10kg cloths ata a time."
