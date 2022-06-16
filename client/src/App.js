@@ -20,6 +20,8 @@ import Main from "./components/productcatalogue/Main";
 import Cart from "./components/productcatalogue/Cart";
 import Product1 from "./components/productcatalogue/Product1";
 import data from "./data";
+import Contactus from "./components/Footer/Contact";
+import Aboutus from "./components/Footer/Aboutus";
 
 function App() {
   const { products } = data;
@@ -122,7 +124,11 @@ function App() {
                 ></Cart>
               }
             />
+            <Route exact path="/contactus" element={<Contactus />} />
+            <Route exact path="/aboutus" element={<Aboutus />} />
           </Routes>
+          
+          
           </div>
         </BrowserRouter>
 

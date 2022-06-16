@@ -1,4 +1,4 @@
-import user from "../../assets/images/user.png";
+import user from "../../assets/images/user.jpg";
 import "./Profile.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
