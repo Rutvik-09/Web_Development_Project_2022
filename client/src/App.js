@@ -9,9 +9,11 @@ import Posts from "./components/CommunityForum/Posts";
 import Profile from "./components/useraccount/Profile";
 import ProductReviews from "./components/Reviews/PostedReviews";
 import ProductPage from "./components/Reviews/ProductPage";
+import AddProduct from "./components/CreateProduct/AddProduct";
 import CreateProductReview from "./components/Reviews/CreateProductReview";
 import CreateOwnerReview from "./components/Reviews/CreateOwnerReview";
 import Analytic from "./components/Reviews/Analytics";
+import CouponCreation from "./components/CreateProduct/CouponCreation";
 import MainBillingPage from "./components/Billing/MainBillingPage";
 import { useState } from "react";
 import Main from "./components/productcatalogue/Main";
@@ -22,7 +24,7 @@ import data from "./data";
 function App() {
   const { products } = data;
   const [cartItems, setCartItems] = useState([]);
- 
+
   const onAdd = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
     if (exist) {
@@ -50,10 +52,10 @@ function App() {
   return (
     <div>
       {/* <header className="App-header"></header> */}
-      
+
       <div className="container">
         <BrowserRouter>
-        <Header countCartItems={cartItems.length} />
+          <Header countCartItems={cartItems.length} />
           <Routes>
             <Route path="/" element={<Signup />}></Route>
             <Route path="/signup" element={<Signup />}></Route>
@@ -62,8 +64,22 @@ function App() {
             <Route path="/communityforum" element={<Posts />}></Route>
             <Route path="/userprofile" element={<Profile />}></Route>
             <Route exact path="/productpage" element={<ProductPage />} />
+            <Route
+              exact
+              path="/addproducts"
+              element={<AddProduct></AddProduct>}
+            />
+            <Route
+              exact
+              path="/createcoupon"
+              element={<CouponCreation></CouponCreation>}
+            />
             <Route exact path="/productreviews" element={<ProductReviews />} />
-            <Route exact path="/MainBillingPage" element={<MainBillingPage />} />
+            <Route
+              exact
+              path="/MainBillingPage"
+              element={<MainBillingPage />}
+            />
             <Route
               exact
               path="/createproductreview"
@@ -75,13 +91,36 @@ function App() {
               element={<CreateOwnerReview />}
             />
             <Route exact path="/analytic" element={<Analytic />} />
-            <Route exact path='/products' element={<div className="row"><Main products={products} onAdd={onAdd}></Main></div>}>
-            </Route>
-            <Route exact path='/product/:id' element={<div className="row"><Product1 products={products} onAdd={onAdd}></Product1></div>}>
-            </Route>
-            <Route exact path='/cart' element={<Cart className="block" cartItems={cartItems} onAdd={onAdd} onRemove={onRemove}></Cart>}/>
-    
-            
+            <Route
+              exact
+              path="/products"
+              element={
+                <div className="row">
+                  <Main products={products} onAdd={onAdd}></Main>
+                </div>
+              }
+            ></Route>
+            <Route
+              exact
+              path="/product/:id"
+              element={
+                <div className="row">
+                  <Product1 products={products} onAdd={onAdd}></Product1>
+                </div>
+              }
+            ></Route>
+            <Route
+              exact
+              path="/cart"
+              element={
+                <Cart
+                  className="block"
+                  cartItems={cartItems}
+                  onAdd={onAdd}
+                  onRemove={onRemove}
+                ></Cart>
+              }
+            />
           </Routes>
         </BrowserRouter>
       </div>
