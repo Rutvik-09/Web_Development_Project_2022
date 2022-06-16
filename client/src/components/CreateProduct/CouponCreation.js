@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function AddProduct() {
   const [category, setCategory] = React.useState("");
@@ -31,6 +32,8 @@ function AddProduct() {
     setCoupon(event.target.value);
   };
 
+  const navigate = useNavigate();
+
   const formValidation = () => {
     console.log(code + description + expiry_date + coupon_amount);
     if (
@@ -43,6 +46,7 @@ function AddProduct() {
       setSnackbarMessage("Coupon created Successfully!!");
       setSeverity("success");
       setOpen(true);
+      navigate("/addproducts");
     } else {
       setSnackbarMessage("Please fill all the required fields");
       setSeverity("error");
