@@ -12,6 +12,8 @@ import ProductPage from "./components/Reviews/ProductPage";
 import CreateProductReview from "./components/Reviews/CreateProductReview";
 import CreateOwnerReview from "./components/Reviews/CreateOwnerReview";
 import Analytic from "./components/Reviews/Analytics";
+import MainBillingPage from "./components/Billing/MainBillingPage";
+
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
             <Route path="/userprofile" element={<Profile />}></Route>
             <Route exact path="/productpage" element={<ProductPage />} />
             <Route exact path="/productreviews" element={<ProductReviews />} />
+            <Route exact path="/MainBillingPage" element={<MainBillingPage />} />
             <Route
               exact
               path="/createproductreview"

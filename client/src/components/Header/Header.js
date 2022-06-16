@@ -32,6 +32,11 @@ const Header = () => {
               Reviews
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/MainBillingPage">
+              Billing
+            </a>
+          </li>
         </ul>
         <ul class="navbar-nav" style={{ marginLeft: "auto" }}>
           <li class="nav-item">
