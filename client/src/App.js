@@ -53,9 +53,10 @@ function App() {
     <div>
       {/* <header className="App-header"></header> */}
 
-      <div className="container">
+      
         <BrowserRouter>
           <Header countCartItems={cartItems.length} />
+          <div className="container">
           <Routes>
             <Route path="/" element={<Signup />}></Route>
             <Route path="/signup" element={<Signup />}></Route>
@@ -122,8 +123,9 @@ function App() {
               }
             />
           </Routes>
+          </div>
         </BrowserRouter>
-      </div>
+
       <Footer />
     </div>
   );
