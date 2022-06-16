@@ -10,6 +10,8 @@ import Profile from "./components/useraccount/Profile";
 import ProductReviews from "./components/Reviews/PostedReviews";
 import ProductPage from "./components/Reviews/ProductPage";
 import AddProduct from "./components/CreateProduct/AddProduct";
+import EditProduct from "./components/CreateProduct/EditProduct";
+import DeleteProduct from "./components/CreateProduct/DeleteProduct";
 import CreateProductReview from "./components/Reviews/CreateProductReview";
 import CreateOwnerReview from "./components/Reviews/CreateOwnerReview";
 import Analytic from "./components/Reviews/Analytics";
@@ -55,10 +57,9 @@ function App() {
     <div>
       {/* <header className="App-header"></header> */}
 
-      
-        <BrowserRouter>
-          <Header countCartItems={cartItems.length} />
-          <div className="container">
+      <BrowserRouter>
+        <Header countCartItems={cartItems.length} />
+        <div className="container">
           <Routes>
             <Route path="/" element={<Signup />}></Route>
             <Route path="/signup" element={<Signup />}></Route>
@@ -72,6 +73,16 @@ function App() {
               path="/addproducts"
               element={<AddProduct></AddProduct>}
             />
+            <Route
+              exact
+              path="/editproduct"
+              element={<EditProduct></EditProduct>}
+            ></Route>
+            <Route
+              exact
+              path="/deleteproduct"
+              element={<DeleteProduct></DeleteProduct>}
+            ></Route>
             <Route
               exact
               path="/createcoupon"
@@ -127,12 +138,10 @@ function App() {
             <Route exact path="/contactus" element={<Contactus />} />
             <Route exact path="/aboutus" element={<Aboutus />} />
           </Routes>
-          
-          
-          </div>
-        </BrowserRouter>
+        </div>
+      </BrowserRouter>
 
-        <Footer />
+      <Footer />
     </div>
   );
 }
