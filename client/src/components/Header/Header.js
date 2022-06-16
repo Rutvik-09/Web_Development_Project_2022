@@ -2,8 +2,8 @@ import "./Header.css";
 import rentlogo from "../../assets/images/rent.png";
 import user from "../../assets/images/user.png";
 import { Badge } from "@mui/material";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { Link } from 'react-router-dom';
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Link } from "react-router-dom";
 
 const Header = (props) => {
   return (
@@ -38,22 +38,33 @@ const Header = (props) => {
           <li class="nav-item">
             <a class="nav-link" href="/MainBillingPage">
               Billing
-              </a>
-          
+            </a>
           </li>
           <li class="nav-item">
-          <a class="nav-link" href="/products">
+            <a class="nav-link" href="/products">
               Products
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/addproducts">
+              Add Products
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/createcoupon">
+              Create Coupon
             </a>
           </li>
         </ul>
         <ul class="navbar-nav" style={{ marginLeft: "auto" }}>
-
-        <li class="nav-item">
-            <a class="nav-link" href="" >
-            <Badge badgeContent={props.countCartItems} color="secondary">
-            <Link to="/cart"> <ShoppingCartIcon /> </Link>
-            </Badge>
+          <li class="nav-item">
+            <a class="nav-link" href="">
+              <Badge badgeContent={props.countCartItems} color="secondary">
+                <Link to="/cart">
+                  {" "}
+                  <ShoppingCartIcon />{" "}
+                </Link>
+              </Badge>
             </a>
           </li>
 
