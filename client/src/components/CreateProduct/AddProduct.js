@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import { palette } from "@mui/system";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function AddProduct() {
   const [category, setCategory] = React.useState("");
@@ -40,6 +41,8 @@ function AddProduct() {
     setImage([...e.target.files]);
   }
 
+  const navigate = useNavigate();
+
   const formValidation = () => {
     console.log(name + description + quantity + rent_amount);
     if (
@@ -52,7 +55,8 @@ function AddProduct() {
       address.length > 0 &&
       (security_deposit > 0) & (available > 0)
     ) {
-      setSnackbarMessage("Equipment Added Successfully!!");
+      navigate("/products");
+      // setSnackbarMessage("Equipment Added Successfully!!");
       setSeverity("success");
       setOpen(true);
     } else {
@@ -63,44 +67,42 @@ function AddProduct() {
   };
 
   return (
-    <div className="background" flexDirection="row">
-      <div className="main" flexDirection="row">
-        <Card
-          component={"form"}
-          className="card1"
-          sx={{ flexDirection: "row" }}
-        >
-          <Snackbar open={open} autoHideDuration={6000}>
-            <Alert severity={severity} sx={{ width: "100%" }}>
-              {SnackbarMessage}
-            </Alert>
-          </Snackbar>
+    <Grid container direction="column" spacing={2}>
+      <Grid item md={10} style={{ padding: "55px" }}>
+        <Card component={"form"}>
+          <Grid container direction="column" alignItems="center" spacing={3}>
+            <Snackbar open={open} autoHideDuration={6000}>
+              <Alert severity={severity} sx={{ width: "100%" }}>
+                {SnackbarMessage}
+              </Alert>
+            </Snackbar>
+            <Grid item xs={12} md={5}>
+              <Typography
+                variant="h3"
+                component="div"
+                gutterBottom
+                className="header"
+              >
+                Add Equipment
+              </Typography>
+            </Grid>
 
-          <Typography
-            variant="h3"
-            component="div"
-            gutterBottom
-            className="header"
-          >
-            Add Product
-          </Typography>
-
-          <div className="row">
-            <div className="row">
-              <div className="col-lg-6">
+            <Grid item container spacing={2} justifyContent="center">
+              <Grid item xs={12} md={4}>
                 <TextField
-                  fullWidth
+                  fullwidth
                   id="outlined-basic"
                   label="Name"
                   value={name}
                   variant="outlined"
-                  sx={{ margin: "3%" }}
+                  sx={{ width: "100%" }}
                   onChange={(e) => setName(e.target.value)}
                   required
                 />
-              </div>
-              <div className="col-lg-6">
-                <FormControl fullWidth sx={{ margin: "3%" }} required>
+              </Grid>
+
+              <Grid item xs={12} md={4}>
+                <FormControl sx={{ width: "100%" }} required>
                   <InputLabel id="demo-simple-select-label">
                     Category
                   </InputLabel>
@@ -128,87 +130,79 @@ function AddProduct() {
                     </MenuItem>
                   </Select>
                 </FormControl>
-              </div>
-            </div>
-          </div>
-
-          <div className="row">
-            <Button
-              className="uploadImage"
-              variant="outlined"
-              onChange={onImageChange}
-              accept="image"
-              value={image}
-              sx={{ margin: "3%", height: "55px", width: 614 }}
-            >
-              {" "}
-              <input type="file" required />{" "}
-            </Button>
-          </div>
-
-          <div className="row">
-            <TextField
-              fullWidth
-              variant="outlined"
-              label="Description"
-              value={description}
-              multiline
-              aria-label="minimum height"
-              minRows={4}
-              placeholder="Enter Description"
-              sx={{ width: 614, height: 140, margin: "3%" }}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="row">
-            <div className="row">
-              <div className="col-lg-6">
+              </Grid>
+            </Grid>
+            <Grid item xs={12} md={12} style={{ width: "67%" }}>
+              <Button
+                fullWidth
+                className="uploadImage"
+                variant="outlined"
+                onChange={onImageChange}
+                accept="image"
+                value={image}
+              >
+                {" "}
+                <input type="file" required />{" "}
+              </Button>
+            </Grid>
+            <Grid item xs={12} style={{ width: "67%" }}>
+              <TextField
+                fullWidth
+                variant="outlined"
+                label="Description"
+                value={description}
+                multiline
+                aria-label="minimum height"
+                minRows={4}
+                placeholder="Enter Description"
+                // sx={{ width: 500 }}
+                onChange={(e) => setDescription(e.target.value)}
+                required
+              />
+            </Grid>
+            <Grid item container spacing={2} justifyContent="center">
+              <Grid item xs={12} md={4}>
                 <TextField
                   fullWidth
                   variant="outlined"
                   label="Quantity"
                   value={quantity}
+                  sx={{ width: "100%" }}
                   inputProps={{ type: "number" }}
-                  sx={{ margin: "3%" }}
                   onChange={(e) => setQuantity(e.target.value)}
                   required
                 />
-              </div>
-              <div className="col-lg-6">
+              </Grid>
+
+              <Grid item xs={12} md={4}>
                 <TextField
                   fullWidth
                   variant="outlined"
                   label="Rent Amount"
                   value={rent_amount}
                   inputProps={{ type: "number" }}
-                  sx={{ margin: "3%" }}
+                  sx={{ width: "100%" }}
                   onChange={(e) => setRentAmount(e.target.value)}
                   required
                 />
-              </div>
-            </div>
-          </div>
-
-          <div className="row">
-            <TextField
-              variant="outlined"
-              label="Address"
-              value={address}
-              multiline
-              aria-label="minimum height"
-              minRows={4}
-              placeholder="Enter Address"
-              onChange={(e) => setAddress(e.target.value)}
-              sx={{ width: 614, height: 140, margin: "3%" }}
-              required
-            />
-          </div>
-
-          <div className="row">
-            <div className="row">
-              <div className="col-lg-6">
+              </Grid>
+            </Grid>
+            <Grid item xs={12} style={{ width: "67%" }}>
+              <TextField
+                fullWidth
+                variant="outlined"
+                label="Address"
+                value={address}
+                multiline
+                aria-label="minimum height"
+                minRows={4}
+                placeholder="Enter Address"
+                onChange={(e) => setAddress(e.target.value)}
+                required
+              />
+            </Grid>
+            <Grid item container spacing={2} justifyContent="center">
+              <Grid item sx={12} md={4}>
                 <TextField
                   fullWidth
                   variant="outlined"
@@ -216,14 +210,15 @@ function AddProduct() {
                   value={security_deposit}
                   inputProps={{ type: "number" }}
                   sx={{
-                    margin: "3%",
+                    width: "100%",
                     pattern: "[0-9]",
                   }}
                   onChange={(e) => setDeposit(e.target.value)}
                   required
                 />
-              </div>
-              <div className="col-lg-6">
+              </Grid>
+
+              <Grid item sx={12} md={4}>
                 <TextField
                   fullWidth
                   variant="outlined"
@@ -231,57 +226,57 @@ function AddProduct() {
                   value={available}
                   inputProps={{ type: "number" }}
                   sx={{
-                    margin: "3%",
+                    width: "100%",
                     pattern: "[0-9]",
                   }}
                   onChange={(e) => setAvailableFor(e.target.value)}
                   required
                 />
-              </div>
-            </div>
-          </div>
-
-          <div className="row">
-            <FormControl fullwidth sx={{ margin: "3%", width: 618 }} required>
-              <InputLabel id="demo-simple-select-label">Coupon</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={coupon}
-                label="Coupon"
-                onChange={handleChange}
-              >
-                <MenuItem value={"Percent-off coupon"}>
-                  Percent-off Coupon
-                </MenuItem>
-                <MenuItem value={"Free gift with rent"}>
-                  Free Gift with Rent
-                </MenuItem>
-                <MenuItem value={"BOGO coupon"}>BOGO Coupon</MenuItem>
-                <MenuItem value={"Mystery deals"}>Mystery deals</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-
-          <Box>
-            <Button
-              className="buttonHover"
-              type="Submit"
-              onClick={formValidation}
-              variant="contained"
-              sx={{
-                margin: "4%",
-                color: "white",
-                bgcolor: "text.secondary",
-                hover: "#6c757d",
-              }}
-            >
-              Submit
-            </Button>
-          </Box>
+              </Grid>
+            </Grid>
+            <Grid item xs={12} md={10} style={{ width: "67%" }}>
+              <FormControl fullWidth required>
+                <InputLabel id="demo-simple-select-label">Coupon</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={coupon}
+                  label="Coupon"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={"Percent-off coupon"}>
+                    Percent-off Coupon
+                  </MenuItem>
+                  <MenuItem value={"Free gift with rent"}>
+                    Free Gift with Rent
+                  </MenuItem>
+                  <MenuItem value={"BOGO coupon"}>BOGO Coupon</MenuItem>
+                  <MenuItem value={"Mystery deals"}>Mystery deals</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item sx={12} md={8}>
+              <Box>
+                <Button
+                  className="buttonHover"
+                  type="Submit"
+                  onClick={formValidation}
+                  variant="contained"
+                  sx={{
+                    mb: 5,
+                    color: "white",
+                    bgcolor: "text.secondary",
+                    hover: "#6c757d",
+                  }}
+                >
+                  Submit
+                </Button>
+              </Box>
+            </Grid>
+          </Grid>
         </Card>
-      </div>
-    </div>
+      </Grid>
+    </Grid>
   );
 }
 

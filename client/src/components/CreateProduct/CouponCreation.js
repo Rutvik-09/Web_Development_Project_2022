@@ -6,6 +6,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Grid,
   TextField,
   Typography,
   Snackbar,
@@ -50,137 +51,127 @@ function AddProduct() {
   };
 
   return (
-    <div class="background" flexDirection="row">
-      <div className="main" flexDirection="row">
-        <Card
-          component={"form"}
-          className="card1"
-          sx={{ flexDirection: "row", height: "37vw" }}
-        >
-          <Snackbar open={open} autoHideDuration={6000}>
-            <Alert severity={severity} sx={{ width: "100%" }}>
-              {SnackbarMessage}
-            </Alert>
-          </Snackbar>
+    <Grid container direction="column" spacing={2}>
+      <Grid item md={10} style={{ padding: "90px" }}>
+        <Card component={"form"}>
+          <Grid container direction="column" alignItems="center" spacing={3}>
+            <Snackbar open={open} autoHideDuration={6000}>
+              <Alert severity={severity} sx={{ width: "100%" }}>
+                {SnackbarMessage}
+              </Alert>
+            </Snackbar>
 
-          <Typography
-            variant="h3"
-            component="div"
-            gutterBottom
-            className="header"
-          >
-            Create Coupon
-          </Typography>
+            <Grid item xs={12} md={5}>
+              <Typography
+                variant="h3"
+                component="div"
+                gutterBottom
+                className="header"
+              >
+                Create Coupon
+              </Typography>
+            </Grid>
 
-          <div className="row">
-            <div className="row">
-              <div className="col-lg-6">
+            <Grid item container spacing={2} justifyContent="center">
+              <Grid item xs={12} md={4}>
                 <TextField
                   fullWidth
                   id="outlined-basic"
                   label="Coupon-code"
                   value={code}
                   variant="outlined"
-                  sx={{ margin: "3%" }}
                   onChange={(e) => setCode(e.target.value)}
                   required
                 />
-              </div>
-              <div className="col-lg-6">
-                <div className="row">
-                  <FormControl
-                    fullwidth
-                    sx={{ margin: "3%", width: 618 }}
-                    required
+              </Grid>
+
+              <Grid item xs={12} md={4}>
+                <FormControl sx={{ width: "100%" }} required>
+                  <InputLabel id="demo-simple-select-label">Type</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={coupon}
+                    label="Coupon"
+                    onChange={handleChange}
                   >
-                    <InputLabel id="demo-simple-select-label">Type</InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      value={coupon}
-                      label="Coupon"
-                      onChange={handleChange}
-                    >
-                      <MenuItem value={"Percent-off coupon"}>
-                        Percent-off Coupon
-                      </MenuItem>
-                      <MenuItem value={"Free gift with rent"}>
-                        Free Gift with Rent
-                      </MenuItem>
-                      <MenuItem value={"BOGO coupon"}>BOGO Coupon</MenuItem>
-                      <MenuItem value={"Mystery deals"}>Mystery deals</MenuItem>
-                    </Select>
-                  </FormControl>
-                </div>
-              </div>
-            </div>
-          </div>
+                    <MenuItem value={"Percent-off coupon"}>
+                      Percent-off Coupon
+                    </MenuItem>
+                    <MenuItem value={"Free gift with rent"}>
+                      Free Gift with Rent
+                    </MenuItem>
+                    <MenuItem value={"BOGO coupon"}>BOGO Coupon</MenuItem>
+                    <MenuItem value={"Mystery deals"}>Mystery deals</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+            </Grid>
 
-          <div className="row">
-            <TextField
-              fullWidth
-              variant="outlined"
-              label="Description"
-              value={description}
-              multiline
-              aria-label="minimum height"
-              minRows={4}
-              placeholder="Enter Description"
-              sx={{ width: 625, height: 140, margin: "3%" }}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-            />
-          </div>
+            <Grid item xs={12} style={{ width: "67%" }}>
+              <TextField
+                fullWidth
+                variant="outlined"
+                label="Description"
+                value={description}
+                multiline
+                aria-label="minimum height"
+                minRows={4}
+                placeholder="Enter Description"
+                onChange={(e) => setDescription(e.target.value)}
+                required
+              />
+            </Grid>
 
-          <div className="row">
-            <div className="row">
-              <div className="col-lg-6">
+            <Grid item container spacing={2} justifyContent="center">
+              <Grid item xs={12} md={4}>
                 <TextField
                   fullWidth
                   variant="outlined"
                   label="Expiry Date"
                   value={expiry_date}
                   inputProps={{ type: "date" }}
-                  sx={{ margin: "3%" }}
                   InputLabelProps={{ shrink: true }}
                   onChange={(e) => setExpiryDate(e.target.value)}
                   required
                 />
-              </div>
-              <div className="col-lg-6">
+              </Grid>
+
+              <Grid item xs={12} md={4}>
                 <TextField
                   fullWidth
                   variant="outlined"
                   label="Coupon Amount"
                   value={coupon_amount}
                   inputProps={{ type: "number" }}
-                  sx={{ margin: "3%" }}
                   onChange={(e) => setCouponAmount(e.target.value)}
                   required
                 />
-              </div>
-            </div>
-          </div>
+              </Grid>
+            </Grid>
 
-          <Box>
-            <Button
-              className="buttonHover"
-              type="Submit"
-              onClick={formValidation}
-              variant="contained"
-              sx={{
-                margin: "4%",
-                color: "white",
-                bgcolor: "text.secondary",
-                hover: "#6c757d",
-              }}
-            >
-              ADD COUPON
-            </Button>
-          </Box>
+            <Grid item sx={12} md={8}>
+              <Box>
+                <Button
+                  className="buttonHover"
+                  type="Submit"
+                  onClick={formValidation}
+                  variant="contained"
+                  sx={{
+                    margin: 2,
+                    color: "white",
+                    bgcolor: "text.secondary",
+                    hover: "#6c757d",
+                  }}
+                >
+                  ADD COUPON
+                </Button>
+              </Box>
+            </Grid>
+          </Grid>
         </Card>
-      </div>
-    </div>
+      </Grid>
+    </Grid>
   );
 }
 
