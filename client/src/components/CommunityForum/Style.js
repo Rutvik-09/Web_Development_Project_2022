@@ -8,8 +8,12 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent:"space-between",
   },
+  displayFlex:{
+    display: "flex"
+  },
   avatar:{
     background: "#5BC85B",
+    marginRight: "15px"
   },
   center:{
     margin:"auto",
@@ -21,7 +25,8 @@ const useStyles = makeStyles({
   buttonDiv:{
     margin:"auto",
     display:"flex",
-    justifyContent:"center",
+    justifyContent:"center",    position:"relative",
+    marginBottom:"25px"
   },
   // button:{
   //   backgroundColor:"#a6dced"
@@ -33,11 +38,19 @@ const useStyles = makeStyles({
     '&:hover': {
       backgroundColor: '#6c757d',
   }},
-
+  flexButton:{
+    position:"absolute",
+    right:0,
+    left:0
+  },
   filter:{
     // display:"flex",
     position:"absolute",
-    right:0
+    right:0,
+    top:0
+  },
+  chip:{
+    marginLeft:"12px"
   }
 });
 

@@ -82,7 +82,7 @@ function AddProduct() {
             gutterBottom
             className="header"
           >
-            Add Equipment
+            Add Product
           </Typography>
 
           <div className="row">

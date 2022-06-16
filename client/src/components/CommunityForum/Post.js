@@ -57,162 +57,149 @@ function Post(props) {
     setAnchorEl(null);
   };
 
-
-  
   return (
     //Referenced from https://mui.com/material-ui/react-card/
-    <Card className={classes.center}>
+    <Card >
       <CardContent>
-        <Typography
-          gutterBottom
-          variant="h7"
-          component="div"
-          className={classes.flex}
-        >
-          <div className={classes.flex}>
+        <div className={classes.flex}>
+          <div className={classes.displayFlex}>
             {/* Referenced from: https://mui.com/material-ui/react-avatar/ */}
             <Avatar className={classes.avatar}>{props.initials}</Avatar>
             <div>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{props.name}
+            <Typography gutterBottom variant="body6" component="div">
+              {props.name}
+              </Typography>
               <Typography gutterBottom variant="body4" component="div">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{props.date}
+                {props.date}
               </Typography>
             </div>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
             {/* Referenced from https://mui.com/material-ui/react-chip/ */}
-            <Chip label={props.category} />
+            <Chip label={props.category} className={classes.chip} />
           </div>
-          <div>
-            <div>
-              {/* Referenced from: https://mui.com/material-ui/icons/ */}
-              <IconButton
-                aria-label="more"
-                id="long-button"
-                aria-controls={open ? "long-menu" : undefined}
-                aria-expanded={open ? "true" : undefined}
-                aria-haspopup="true"
-                onClick={handleClick}
-              >
-                <MoreVertIcon />
-              </IconButton>
-              {/* Referenced from: https://mui.com/material-ui/react-menu/ */}
-              <Menu
-                id="long-menu"
-                MenuListProps={{
-                  "aria-labelledby": "long-button",
-                }}
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                PaperProps={{
-                  style: {
-                    maxHeight: ITEM_HEIGHT * 4.5,
-                    width: "20ch",
-                  },
-                }}
-              >
-                {/* {options.map((option) => ( */}
-                  <MenuItem
-                    key="Edit"
-                    selected={"Edit" === "Pyxis"}
-                    onClick={handleClickOpen1}
-                  >
-                    Edit
-                  </MenuItem>
-                  <MenuItem
-                    key="Delete"
-                    selected={"Delete" === "Pyxis"}
-                    onClick={handleClickDeleteOpen}
-                  >
-                    Delete
-                  </MenuItem>
-                {/* ))} */}
-              </Menu>
-            </div>
-          </div>
-        </Typography>
+
+          {/* Referenced from: https://mui.com/material-ui/icons/ */}
+          <IconButton
+            aria-label="more"
+            id="long-button"
+            aria-controls={open ? "long-menu" : undefined}
+            aria-expanded={open ? "true" : undefined}
+            aria-haspopup="true"
+            onClick={handleClick}
+          >
+            <MoreVertIcon />
+          </IconButton>
+          {/* Referenced from: https://mui.com/material-ui/react-menu/ */}
+          <Menu
+            id="long-menu"
+            MenuListProps={{
+              "aria-labelledby": "long-button",
+            }}
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            PaperProps={{
+              style: {
+                maxHeight: ITEM_HEIGHT * 4.5,
+                width: "20ch",
+              },
+            }}
+          >
+            {/* {options.map((option) => ( */}
+            <MenuItem
+              key="Edit"
+              selected={"Edit" === "Pyxis"}
+              onClick={handleClickOpen1}
+            >
+              Edit
+            </MenuItem>
+            <MenuItem
+              key="Delete"
+              selected={"Delete" === "Pyxis"}
+              onClick={handleClickDeleteOpen}
+            >
+              Delete
+            </MenuItem>
+            {/* ))} */}
+          </Menu>
+        </div>
 
         <Typography variant="body2" color="text.secondary">
           {props.desc}
         </Typography>
-        
+
         <Dialog open={deleteOpen} onClose={handleClickDeleteClose}>
-            <DialogTitle>Delete Post</DialogTitle>
-            <form>
-              <DialogContent>
-                <DialogContentText>
-                  Are you sure you want to delete this post?
-                </DialogContentText>
+          <DialogTitle>Delete Post</DialogTitle>
+          <form>
+            <DialogContent>
+              <DialogContentText>
+                Are you sure you want to delete this post?
+              </DialogContentText>
+            </DialogContent>
 
-              </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClickDeleteClose}>No</Button>
+              <Button onSubmit={handleClickDeleteClose} type="submit">
+                Yes
+              </Button>
+            </DialogActions>
+          </form>
+        </Dialog>
 
-              <DialogActions>
-                <Button onClick={handleClickDeleteClose}>No</Button>
-                <Button onSubmit={handleClickDeleteClose} type="submit">
-                  Yes
-                </Button>
-              </DialogActions>
-            </form>
-          </Dialog>
+        <Dialog open={open1} onClose={handleClickDeleteClose}>
+          <DialogTitle>Edit Post</DialogTitle>
+          <form>
+            <DialogContent>
+              <DialogContentText>
+                To edit the post, please fill all the below required
+                information:
+              </DialogContentText>
 
-          <Dialog open={open1} onClose={handleClickDeleteClose}>
-            <DialogTitle>Edit Post</DialogTitle>
-            <form>
-              <DialogContent>
-                <DialogContentText>
-                  To edit the post, please fill all the below required
-                  information:
-                </DialogContentText>
+              <TextField
+                autoFocus
+                required
+                margin="dense"
+                id="name"
+                label="Category"
+                fullWidth
+                variant="outlined"
+              />
+              <TextField
+                autoFocus
+                required
+                margin="dense"
+                id="name"
+                type="date"
+                fullWidth
+                variant="outlined"
+              />
+              <TextField
+                autoFocus
+                required
+                margin="dense"
+                id="name"
+                label="Description"
+                fullWidth
+                variant="outlined"
+                multiline
+                rows={4}
+              />
+            </DialogContent>
 
-                <TextField
-                  autoFocus
-                  required
-                  margin="dense"
-                  id="name"
-                  label="Category"
-                  fullWidth
-                  variant="outlined"
-                />
-                <TextField
-                  autoFocus
-                  required
-                  margin="dense"
-                  id="name"
-                  type="date"
-                  fullWidth
-                  variant="outlined"
-                />
-                <TextField
-                  autoFocus
-                  required
-                  margin="dense"
-                  id="name"
-                  label="Description"
-                  fullWidth
-                  variant="outlined"
-                  multiline
-                  rows={4}
-                />
-              </DialogContent>
-
-              <DialogActions>
-                <Button onClick={handleClose1}>Cancel</Button>
-                <Button onSubmit={handleClose1} type="submit">
-                  Submit
-                </Button>
-              </DialogActions>
-            </form>
-          </Dialog>
-
-
+            <DialogActions>
+              <Button onClick={handleClose1}>Cancel</Button>
+              <Button onSubmit={handleClose1} type="submit">
+                Submit
+              </Button>
+            </DialogActions>
+          </form>
+        </Dialog>
       </CardContent>
       <CardActions>
         {/* <Button size="small">Share</Button>
         <Button size="small">Learn More</Button> */}
       </CardActions>
     </Card>
-
-    
   );
 }
 
