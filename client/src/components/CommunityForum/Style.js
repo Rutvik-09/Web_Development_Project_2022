@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     display: "flex"
   },
   avatar:{
-    background: "#5BC85B",
+    // background: "#5BC85B",
     marginRight: "15px"
   },
   center:{
