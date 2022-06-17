@@ -106,7 +106,7 @@ function ProductPage() {
                   navigate("/createproductreview");
                 }}
               >
-                <h5>Write a customer review</h5>
+                <h5>Write a product review</h5>
               </button>
             </div>
             <div class="btn-leave-seller-feedback">

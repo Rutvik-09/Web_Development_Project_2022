@@ -2,8 +2,16 @@ import React from "react";
 import { Rating } from "react-simple-star-rating";
 import { MDBContainer, MDBRow, MDBCol, MDBInput } from "mdbreact";
 import "../Reviews/CreateReview.css";
+import { useNavigate } from "react-router-dom";
 
 function CreateProductReview() {
+  const navigate = useNavigate();
+
+ const onSubmit=()=>{
+  navigate("/productreviews");
+ }
+
+
   return (
     <div>
       <MDBContainer>
@@ -43,7 +51,7 @@ function CreateProductReview() {
               <div class="submit-button">
                 <button
                   className="btn"
-                  onClick={() => alert("Review Posted")}
+                  onClick={onSubmit}
                   type="submit"
                 >
                   Submit

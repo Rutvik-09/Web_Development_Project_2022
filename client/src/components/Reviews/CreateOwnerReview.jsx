@@ -2,8 +2,17 @@ import React from "react";
 import { Rating } from "react-simple-star-rating";
 import "../Reviews/CreateReview.css";
 import { MDBContainer, MDBRow, MDBCol, MDBInput } from "mdbreact";
+import { useNavigate } from "react-router-dom";
 
 function CreateOwnerReview() {
+
+  const navigate = useNavigate();
+  //Get form values once form is submitted
+  const onSubmit = (formValues) => {
+    navigate("/productreviews");
+  };
+  
+
   return (
     <div>
       <MDBContainer>
@@ -43,7 +52,7 @@ function CreateOwnerReview() {
             <div class="submit-button">
               <button
                 className="btn"
-                onClick={() => alert("Review Posted")}
+                onClick={onSubmit}
               >
                 Submit
               </button>

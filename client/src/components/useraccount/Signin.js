@@ -2,8 +2,17 @@ import "./Signin.css";
 import rentimage from "../../assets/images/HomeGlobeIcon.jpg";
 import { Formik,Form } from "formik";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
+
+  const navigate = useNavigate();
+//Get form values once form is submitted
+const signinForm = (formValues) => {
+  navigate("/products");
+};
+
+
   return (
     //Formik is a library used for form validation  https://formik.org/
     <Formik
@@ -86,11 +95,6 @@ const Signin = () => {
 };
 
 
-
-//Get form values once form is submitted
-const signinForm = (formValues) => {
-    console.log(formValues);
-};
 
 
 const SigninFormValidation = Yup.object().shape({

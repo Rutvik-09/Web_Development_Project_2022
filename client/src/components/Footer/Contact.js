@@ -125,34 +125,23 @@ const Contactus = () => {
   
   
   const defaultValues = {
-    firstName: "",
-    lastName: "",
+    fullname: "",
     email: "",
     mobileno: "",
-    address: "",
-    password: "",
+    address: ""
   };
   
   
   
   const SignupFormValidation = Yup.object().shape({
   
-    firstName: Yup.string().required("First name is required"),
-  
-    lastName: Yup.string().required("Last name is required"),
+    fullname: Yup.string().required("First name is required"),
   
     email: Yup.string().email("Invalid Email").required("Email is required"),
   
     mobileno:Yup.number().required("Mobile no is required"),
   
     address: Yup.string().required("Address is required").max(100,"Maximum 100 characters are allowed"),
-  
-    password: Yup.string()
-      .required("Password is required")
-      .min(8, "Password length should be 8 chars minimum")
-      .max(12, "Password length is 12 chars maximum")
-    .matches(/^(?=.*\d)(?=.+[&!$%@?#])[A-Za-z\d!*$%@?&#]{8,12}$/,"Password should contains at least one number and special character" )
-  
   
   });
   

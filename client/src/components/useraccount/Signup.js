@@ -13,7 +13,7 @@ const Signup = () => {
   //Get form values once form is submitted
 const signupForm = (formValues) => {
   console.log("form values are "+formValues);
-  navigate("/signin");
+  navigate("/productpage");
 };
   return (
   //Formik is a library used for form validation  https://formik.org/
@@ -39,8 +39,8 @@ const signupForm = (formValues) => {
             <div className="col-md-6 form">
               <Form onSubmit={handleSubmit}>
                 <h3>Sign Up</h3>
-                <div className="mb-2 row">
-                  <div className="col">
+               
+                  <div className="mb-2">
                     <label>First name</label>
                     <input
                       type="text"
@@ -56,7 +56,7 @@ const signupForm = (formValues) => {
                       <span className="error-feedback">{errors.firstName}</span>
                     ) : null}
                   </div>
-                  <div className="col">
+                  <div className="mb-2">
                     <label>Last name</label>
                     <input
                       type="text"
@@ -72,7 +72,7 @@ const signupForm = (formValues) => {
                       <span className="error-feedback">{errors.lastName}</span>
                     ) : null}
                   </div>
-                </div>
+           
                 
                 <div className="mb-2">
                   <label>Email address</label>
