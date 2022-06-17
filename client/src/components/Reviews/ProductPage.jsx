@@ -129,7 +129,7 @@ function ProductPage() {
                 <h5>All Posted Reviews</h5>
               </button>
             </div>
-            <div class="btn-analytics">
+            {/* <div class="btn-analytics">
               <button
                 className="btn"
                 onClick={() => {
@@ -138,7 +138,7 @@ function ProductPage() {
               >
                 <h5>Analytics</h5>
               </button>
-            </div>
+            </div> */}
             </MDBContainer>
           </MDBCol>
 

@@ -71,6 +71,9 @@ function AddProduct() {
                 component="div"
                 gutterBottom
                 className="header"
+                sx={{
+                  color: "#979AA1",
+                }}
               >
                 Create Coupon
               </Typography>
@@ -168,6 +171,9 @@ function AddProduct() {
                     color: "white",
                     bgcolor: "text.secondary",
                     hover: "#6c757d",
+                    "&:hover": {
+                      backgroundColor: "#6c757d",
+                    }
                   }}
                 >
                   ADD COUPON

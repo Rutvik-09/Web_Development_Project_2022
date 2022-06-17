@@ -36,11 +36,6 @@ const Header = (props) => {
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/MainBillingPage">
-              Billing
-            </a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="/products">
               Take on rent
             </a>
@@ -63,6 +58,16 @@ const Header = (props) => {
           <li class="nav-item">
             <a class="nav-link" href="/createcoupon">
               Create Coupon
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/MainBillingPage">
+              Billing
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/analytic">
+              Analytics
             </a>
           </li>
         </ul>
