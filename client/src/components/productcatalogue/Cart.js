@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card } from '@mui/material'; 
 import { Button } from '@mui/material';
 import { CardActionArea } from '@mui/material';
@@ -8,7 +8,8 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Cart(props) {
   const { cartItems, onAdd, onRemove } = props;
-  const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
+  const [days,setdays]= useState(1)
+  const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price * days , 0);
   const taxPrice = itemsPrice * 0.14;
   const shippingPrice = itemsPrice > 2000 ? 0 : 20;
   const totalPrice = itemsPrice + taxPrice + shippingPrice;
@@ -53,7 +54,12 @@ export default function Cart(props) {
            </div>
 
             <div className="text-right">
-              {item.qty} x ${item.price.toFixed(2)}
+            <input type="number" min="1" max="7" placeholder="1" onChange={(event)=>
+              {
+                setdays(event.target.value)
+                console.log(days)
+              }}></input>
+              days x {item.qty} x ${item.price.toFixed(2)}
             </div>
           </div>
         ))}
