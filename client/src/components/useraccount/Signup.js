@@ -4,6 +4,9 @@ import {  Link } from 'react-router-dom';
 import { Formik,Form } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import constant from "../../AppConstant.json";
+
+
 
 const Signup = () => {
   
