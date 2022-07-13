@@ -7,12 +7,14 @@
 const express=require("express");
 
 const authenticateUser=require("../Middleware/authenticate.js");
-const {registerUser,verifyUserAccount}=require("../Controller/userController.js");
+const {registerUser,verifyUserAccount,checkUserRegistered}=require("../Controller/userController.js");
 
 const userRouter = express.Router();
 
 //HTTP post request to register user map to registerUser function.
 userRouter.post('/registerUser', registerUser);
 userRouter.post('/verifyAccount', verifyUserAccount);
+userRouter.post('/isUserRegistered', checkUserRegistered);
+
 
 module.exports=userRouter;

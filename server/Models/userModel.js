@@ -7,6 +7,8 @@
  */
 
 
+ const mongoose = require("mongoose");
+
  const collection = mongoose.Schema({
     useId: { type: String },
     firstName: { type: String, required: true },

@@ -24,6 +24,9 @@ import Product1 from "./components/productcatalogue/Product1";
 import data from "./data";
 import Contactus from "./components/Footer/Contact";
 import Aboutus from "./components/Footer/Aboutus";
+import 'react-toastify/dist/ReactToastify.css';
+import Verifyaccount from "./components/useraccount/VerifyAccount";
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const { products } = data;
@@ -55,6 +58,8 @@ function App() {
   };
   return (
     <div>
+
+<ToastContainer />
       {/* <header className="App-header"></header> */}
 
       <BrowserRouter>
@@ -68,6 +73,7 @@ function App() {
             <Route path="/communityforum" element={<Posts />}></Route>
             <Route path="/userprofile" element={<Profile />}></Route>
             <Route exact path="/productpage" element={<ProductPage />} />
+            <Route exact path="/verifyaccount/:id" element={<Verifyaccount />} />
             <Route
               exact
               path="/addproducts"
