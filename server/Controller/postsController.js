@@ -18,7 +18,7 @@ try{
         category: postDetails.category,
         date: postDetails.date,
         description: postDetails.description,
-        name: postDetails.name
+        fullname: postDetails.fullname
     });
 
     res.status(200).json({

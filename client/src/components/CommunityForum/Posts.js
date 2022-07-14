@@ -16,11 +16,16 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import axios from "axios";
+import { useEffect } from "react";
+import constant from "../../AppConstant.json";
 //import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 //import AppBar  from "../Appbar";
 
 function Posts() {
   const classes = useStyles();
+  const moment = require('moment');
+
+  const [posts, setPosts] = useState([]);
 
   const [value, setValue] = React.useState(new Date("2014-08-18T21:11:54"));
 
@@ -37,6 +42,29 @@ function Posts() {
   const handleChange = (newValue) => {
     setValue(newValue);
   };
+
+  const getInitials = (name) => {
+    
+    // Referred from: https://www.codegrepper.com/code-examples/javascript/get+initials+from+name+javascript
+
+    console.log(name);
+    const fullName = name.split(" ");
+    //const initials = fullName[0]+fullName[1];
+    const initials = fullName.shift().charAt(0) + fullName.pop().charAt(0);
+    return initials.toUpperCase();
+
+    
+  }
+
+  useEffect(() => {
+    axios
+      .get(constant.BE_URL + "viewPosts")
+      .then((response) => {
+        setPosts(response.data.data);
+      }).catch((err) => {
+        console.log(err)
+      });
+  });
 
   return (
     <div>
@@ -146,7 +174,19 @@ function Posts() {
         </div>
         {/* Referenced from https://mui.com/material-ui/react-grid/ */}
         <Grid container spacing={2}>
-          <Grid item>
+          {posts.map(post => (
+            <Grid item xs={12} md={12}>
+            <Post
+              name = {post.fullname}
+              date= {moment(post.date).format("MMM Do YYYY")}
+              initials= {getInitials(post.fullname)}
+              category={post.category}
+              desc={post.description}
+            ></Post>
+          </Grid>
+          ))}
+          </Grid>
+          {/* <Grid item>
             <Post
               name="Rushi Patel"
               date="February 25, 2019"
@@ -209,7 +249,7 @@ function Posts() {
               desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             ></Post>
           </Grid>
-        </Grid>
+        </Grid> */}
       </Container>
     </div>
   );
