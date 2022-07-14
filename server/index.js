@@ -10,6 +10,7 @@ const app = express();
 const dbConnection=require("./DbConnection/dbconnection.js");
 const userRouter=require("./Routes/userRoutes.js");
 const postsRoutes=require("./Routes/postsRoutes.js")
+const messagingRoutes=require("./Routes/messagingRoutes.js")
 const PORT = process.env.PORT || 8080;
 
 
@@ -22,6 +23,7 @@ const appParent="/unitedrental/";
 
 app.use(appParent + "userdetails", userRouter);
 app.use(appParent, postsRoutes);
+app.use(appParent, messagingRoutes);
 
 
 app.get("/", (req, res) => {
