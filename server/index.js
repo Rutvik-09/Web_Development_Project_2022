@@ -9,6 +9,7 @@ const cors = require("cors");
 const app = express();
 const dbConnection=require("./DbConnection/dbconnection.js");
 const userRouter=require("./Routes/userRoutes.js");
+const postsRoutes=require("./Routes/postsRoutes.js")
 const PORT = process.env.PORT || 8080;
 
 
@@ -20,6 +21,8 @@ dbConnection();
 const appParent="/unitedrental/";
 
 app.use(appParent + "userdetails", userRouter);
+app.use(appParent, postsRoutes);
+
 
 app.get("/", (req, res) => {
     res.send("Application is up successfully");

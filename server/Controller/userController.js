@@ -19,5 +19,4 @@ const verifyUserAccount= async ()=>{
 
 };
 
-
 module.exports={registerUser,verifyUserAccount};
