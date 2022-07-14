@@ -43,11 +43,13 @@ try{
 }
 
 const updatePost= async (req,res)=>{
+    let yourDate = new Date()
+let todaysDate = yourDate.toISOString().split('T')[0]
     try{
         const updatePostDetails = req.body.updatePost;
         let _id = updatePostDetails._id;
         let category = updatePostDetails.category;
-        let date = updatePostDetails.date;
+        let date = todaysDate;
         let description = updatePostDetails.description;
         
         let doc = await postsModel.findOneAndUpdate({_id}, {category,date,description});

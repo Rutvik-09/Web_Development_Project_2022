@@ -88,7 +88,7 @@ function Posts() {
       }).catch((err) => {
         console.log(err)
       });
-  });
+  },[]);
 
   return (
     <div>
@@ -215,6 +215,7 @@ function Posts() {
               initials= {getInitials(post.fullname)}
               category={post.category}
               desc={post.description}
+              id={post._id}
             ></Post>
           </Grid>
           ))}
