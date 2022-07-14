@@ -79,16 +79,19 @@ function Post(props) {
           </div>
 
           {/* Referenced from: https://mui.com/material-ui/icons/ */}
+          {props.name == "Rushi Patel" ? (
           <IconButton
-            aria-label="more"
-            id="long-button"
-            aria-controls={open ? "long-menu" : undefined}
-            aria-expanded={open ? "true" : undefined}
-            aria-haspopup="true"
-            onClick={handleClick}
-          >
-            <MoreVertIcon />
-          </IconButton>
+          aria-label="more"
+          id="long-button"
+          aria-controls={open ? "long-menu" : undefined}
+          aria-expanded={open ? "true" : undefined}
+          aria-haspopup="true"
+          onClick={handleClick}
+        >
+          <MoreVertIcon />
+        </IconButton>
+        ) : null}
+          
           {/* Referenced from: https://mui.com/material-ui/react-menu/ */}
           <Menu
             id="long-menu"

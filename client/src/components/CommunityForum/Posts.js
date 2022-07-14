@@ -18,14 +18,23 @@ import DialogTitle from "@mui/material/DialogTitle";
 import axios from "axios";
 import { useEffect } from "react";
 import constant from "../../AppConstant.json";
+import { useNavigate } from "react-router-dom";
+
 //import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 //import AppBar  from "../Appbar";
 
 function Posts() {
   const classes = useStyles();
+  let navigate = useNavigate();
   const moment = require('moment');
 
   const [posts, setPosts] = useState([]);
+  const [category, setCategory] = useState("");
+  const [date, setDate] = useState("");
+  const [description, setDescription] = useState("");
+  const [fullname, setFullname] = useState("");
+
+  const [responseData, setResponseData] = React.useState("");
 
   const [value, setValue] = React.useState(new Date("2014-08-18T21:11:54"));
 
@@ -37,6 +46,21 @@ function Posts() {
 
   const handleClose = () => {
     setOpen(false);
+
+    axios.post(constant.BE_URL + "createPost", {
+      postData:{category:category,
+        description:description,
+        fullname:"Hardcode name"}
+      
+    })
+    .then(function (response) {
+      console.log(response);
+      // localStorage.setItem("email",email)
+      
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   };
 
   const handleChange = (newValue) => {
@@ -121,8 +145,11 @@ function Posts() {
                   label="Category"
                   fullWidth
                   variant="outlined"
+                  onChange={(event) => {
+                    setCategory(event.target.value);
+                  }}
                 />
-                <TextField
+                {/* <TextField
                   autoFocus
                   required
                   margin="dense"
@@ -130,7 +157,10 @@ function Posts() {
                   type="date"
                   fullWidth
                   variant="outlined"
-                />
+                  onChange={(event) => {
+                    setDate(event.target.value);
+                  }}
+                /> */}
                 <TextField
                   autoFocus
                   required
@@ -141,12 +171,15 @@ function Posts() {
                   variant="outlined"
                   multiline
                   rows={4}
+                  onChange={(event) => {
+                    setDescription(event.target.value);
+                  }}
                 />
               </DialogContent>
 
               <DialogActions>
                 <Button onClick={handleClose}>Cancel</Button>
-                <Button onSubmit={handleClose} type="submit">
+                <Button onSubmit={handleClose} onClick={handleClose} type="submit">
                   Submit
                 </Button>
               </DialogActions>

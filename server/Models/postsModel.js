@@ -14,7 +14,11 @@ const mongoose = require("mongoose")
     date: { type: Date, required: true },
     description: { type: String, required: true },
     fullname: {type:String, required: true }
-  });
+  },
+  {
+    timestamps:true,
+  }
+  );
 
   const postsModel = mongoose.model("postsModel", collection);
   

@@ -11,12 +11,15 @@ const createPost= async (req, res)=>{
 const postDetails = req.body.postData;
 let postId = Math.random().toString().substring(2, 8);
 
+let yourDate = new Date()
+let todaysDate = yourDate.toISOString().split('T')[0]
+
 try{
 
     await postsModel.create({
         _id: postId,
         category: postDetails.category,
-        date: postDetails.date,
+        date: todaysDate,
         description: postDetails.description,
         fullname: postDetails.fullname
     });
