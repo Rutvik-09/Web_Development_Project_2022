@@ -64,7 +64,7 @@ const verifyAccount = (formValues) => {
             <div className="form-container row">
               <div className="col-md-6 form">
                 <Form onSubmit={handleSubmit}>
-                  <h3>Forget password</h3>
+                  <h3>Verify Account</h3>
                   <div className="mb-3">
                     <label>Email address</label>
                     <input

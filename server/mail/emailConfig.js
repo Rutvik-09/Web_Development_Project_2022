@@ -11,7 +11,7 @@ const emailSender = emailConfig.createTransport({
     service: "gmail",
     auth: {
       user: "patelvivek221996@gmail.com",
-      pass: "",
+      pass: "vaxpnnyqgryclnxj",
     },
   });
 

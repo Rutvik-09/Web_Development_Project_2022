@@ -20,7 +20,8 @@
     isAccountVerified: { type: Boolean, default: false },
     codeToVerify: { type: String, required: true },
     userPreference:{ type: String },
-    profileImage: { type: String }
+    profileImage: { type: String },
+    resetPswdCode: { type: String }
   });
 
   const UserDetails = mongoose.model("userdetails", collection);

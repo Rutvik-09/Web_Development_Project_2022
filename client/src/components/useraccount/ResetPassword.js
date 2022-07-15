@@ -2,30 +2,40 @@ import "./Forgetpswd.css";
 import rentimage from "../../assets/images/HomeGlobeIcon.jpg";
 import { Formik,Form } from "formik";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import constant from "../../AppConstant.json";
 import axios from "axios";
+import bycrypt from "bcryptjs";
 
-const Forgetpswd = () => {
+const ResetPassword = () => {
 
   const navigate = useNavigate();
+  const tokenString = useParams().token;
 
 //Get form values once form is submitted
-const forgetpswdForm = (formValues) => {
+const resetpswdForm = async (formValues) => {
+
+    const salt = await bycrypt.genSalt(12);
+    const hashedPswd = await bycrypt.hash(formValues.newpassword, salt);
 
 
-  const bodyData = {email:formValues.email}
+  const bodyData={resetPswdData:{
+    email:formValues.email,
+    code:tokenString,
+    newpassword:hashedPswd
+}};
+
 
   console.log(bodyData);
 
-    axios.post(constant.BE_URL + "userdetails/sendResetPasswordLink", bodyData)
+    axios.post(constant.BE_URL + "userdetails/resetPassword", bodyData)
       .then(
         response => {
-          if (response.data.linkSend) {
+          if (response.data.pswdReset) {
             toast.success(response.data.message);
-            navigate("/signup");
+            navigate("/signin");
           } else {
             toast.error(response.data.message);
           }
@@ -33,7 +43,7 @@ const forgetpswdForm = (formValues) => {
       )
       .catch(error => {
         console.error('There was an error!', error);
-        toast.error("Error while sending reset password link");
+        toast.error("Error while updating password");
       });
 };
 
@@ -42,7 +52,7 @@ const forgetpswdForm = (formValues) => {
     <Formik
       initialValues={defaultValues}
       validationSchema={ResetpswdFormValidation}
-      onSubmit={forgetpswdForm}
+      onSubmit={resetpswdForm}
     >
       {(formik) => {
         const {
@@ -59,7 +69,7 @@ const forgetpswdForm = (formValues) => {
           <div className="form-container row">
             <div className="col-md-6 form">
               <Form onSubmit={handleSubmit}>
-                <h3>Forget password</h3>
+                <h3>Reset password</h3>
                 <div className="mb-3">
                   <label>Email address</label>
                   <input
@@ -76,6 +86,22 @@ const forgetpswdForm = (formValues) => {
                     <span className="error-feedback">{errors.email}</span>
                   ) : null}
                 </div>
+                <div className="mb-2">
+                  <label>New password</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    placeholder="Enter password"
+                    name="newpassword"
+                    id="newpassword"
+                    value={values.newpassword}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                  />
+                  {errors.newpassword && touched.newpassword ? (
+                    <span className="error-feedback">{errors.newpassword}</span>
+                  ) : null}
+                </div>
                 <div className="d-grid">
                   
                 <center><button
@@ -83,7 +109,7 @@ const forgetpswdForm = (formValues) => {
                     className="btn btn-secondary"
                     disabled={!(dirty && isValid)}
                   >
-                    Send reset password link
+                    Reset password
                   </button></center>
                 </div>
               
@@ -107,7 +133,15 @@ const forgetpswdForm = (formValues) => {
 
 const ResetpswdFormValidation = Yup.object().shape({
 
-    email: Yup.string().email("Invalid Email").required("Email is required")
+    email: Yup.string().email("Invalid Email").required("Email is required"),
+    newpassword: Yup.string()
+    .required("Password is required")
+    .min(8, "Password length should be 8 chars minimum")
+    .max(12, "Password length is 12 chars maximum")
+    .matches(
+      /^(?=.*\d)(?=.+[&!$%@?#])[A-Za-z\d!*$%@?&#]{8,12}$/,
+      "Password should contains at least one number and special character"
+    ),
   
 });
 
@@ -115,8 +149,8 @@ const ResetpswdFormValidation = Yup.object().shape({
 
 const defaultValues = {
     email: "",
-    password: "",
+    newpassword: "",
   };
 
 
-export default Forgetpswd;
+export default ResetPassword;
