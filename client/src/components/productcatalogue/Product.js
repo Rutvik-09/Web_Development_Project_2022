@@ -13,6 +13,8 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import useStyles from "./Style";
 import TextField from "@mui/material/TextField";
+import constant from "../../AppConstant.json";
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faDungeon,
@@ -27,6 +29,8 @@ export default function Product(props) {
   const { product, onAdd } = props;
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [subject, setSubject] = React.useState();
+  const [description, setDescription] = React.useState();
 
   const [confirmSend, setConfirmSend] = React.useState(false);
 
@@ -61,6 +65,43 @@ export default function Product(props) {
       setFinalErrorMessage("");
       setFinalError(false);
       setConfirmSend(true);
+
+      let userIdFetch = 759522;
+      let ownerEmail = null;
+
+      axios
+        .post(constant.BE_URL + "userdetails/" + "getDataByUserId", {
+          userId: userIdFetch,
+        })
+        .then(function (response) {
+          console.log(response);
+          ownerEmail = response.data.userData.emailAddress;
+          console.log(ownerEmail);
+          // localStorage.setItem("email",email)
+          let useremail = localStorage.getItem("emailAddress");
+          
+
+          axios
+            .post(constant.BE_URL + "sendMessageToOwner", {
+              data: {
+                toEmail: ownerEmail,
+                ccEmail: useremail,
+                subject: subject,
+                description: description
+              },
+            })
+            .then(function (response) {
+              console.log(response);
+              // window.location.reload();
+              // localStorage.setItem("email",email)
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
   };
 
@@ -100,7 +141,7 @@ export default function Product(props) {
                 color: "#FFFFFF",
                 "&:hover": {
                   backgroundColor: "#6c757d",
-                }
+                },
               }}
               onClick={() => onAdd(product)}
             >
@@ -109,14 +150,18 @@ export default function Product(props) {
           </div>
           <div>
             <Button onClick={handleClickOpen}>
-              <div  sx={{
-                color: "#979AA1"
-              }}>
+              <div
+                sx={{
+                  color: "#979AA1",
+                }}
+              >
                 Please click here to message the owner -
               </div>
-              <div  sx={{
-                color: "#979AA1"
-              }}>
+              <div
+                sx={{
+                  color: "#979AA1",
+                }}
+              >
                 {/* <svg
                       onClick={handleClickOpen}
                       xmlns="http://www.w3.org/2000/svg"
@@ -173,6 +218,9 @@ export default function Product(props) {
               label="Subject"
               fullWidth
               variant="outlined"
+              onChange={(event) => {
+                setSubject(event.target.value);
+              }}
             />
             <TextField
               autoFocus
@@ -184,6 +232,9 @@ export default function Product(props) {
               variant="outlined"
               multiline
               rows={4}
+              onChange={(event) => {
+                setDescription(event.target.value);
+              }}
             />
 
             <div className={classes.errorMessageCenter}>

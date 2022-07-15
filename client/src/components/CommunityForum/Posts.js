@@ -152,11 +152,13 @@ function Posts() {
 
     console.log(name);
   
-    let firstname = localStorage.getItem("firstname");
-    let lastname = localStorage.getItem("lastname");
+    // let firstname = localStorage.getItem("firstname");
+    // let lastname = localStorage.getItem("lastname");
+    let fullName = name.split(" ");
     //const initials = fullName[0]+fullName[1];
     //const initials = fullName.shift().charAt(0) + fullName.pop().charAt(0);
-    const initials = firstname.charAt(0) + lastname.charAt(0);
+    const initials = fullName[0].charAt(0) + fullName[1].charAt(0);
+    //const initials = firstname.charAt(0) + lastname.charAt(0);
     console.log(initials);
     return initials.toUpperCase();
     

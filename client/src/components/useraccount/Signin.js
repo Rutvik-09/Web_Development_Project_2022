@@ -29,6 +29,7 @@ const Signin = () => {
             localStorage.setItem("userid",response.data.userDetails.useId);
             localStorage.setItem("firstname",response.data.userDetails.firstName);
             localStorage.setItem("lastname",response.data.userDetails.lastName);
+            localStorage.setItem("emailAddress",response.data.userDetails.emailAddress);
             console.log("userdata");
              localStorage.setItem("userdetails",response.data.userDetails);
             toast.success(response.data.message);
