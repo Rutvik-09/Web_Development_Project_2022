@@ -12,7 +12,7 @@ const mongoose = require("mongoose");
 //https://www.section.io/engineering-education/nodejs-mongoosejs-mongodb/
 
 const DB_URL =
-"mongodb+srv://root:root@unitedrental.oqosi9p.mongodb.net/rental";
+"mongodb+srv://root:root@unitedrental.oqosi9p.mongodb.net/rental?retryWrites=true&w=majority";
 
 const warningParam={ useNewUrlParser: true };
 

@@ -8,11 +8,13 @@ import Footer from "./components/Footer/Footer";
 import Posts from "./components/CommunityForum/Posts";
 import Profile from "./components/useraccount/Profile";
 import ProductReviews from "./components/Reviews/PostedReviews";
+import PostedOwnerReviews from "./components/Reviews/PostedOwnerReviews";
 import ProductPage from "./components/Reviews/ProductPage";
 import AddProduct from "./components/CreateProduct/AddProduct";
 import EditProduct from "./components/CreateProduct/EditProduct";
 import DeleteProduct from "./components/CreateProduct/DeleteProduct";
 import CreateProductReview from "./components/Reviews/CreateProductReview";
+import UpdateProductReview from "./components/Reviews/UpdateProductReview";
 import CreateOwnerReview from "./components/Reviews/CreateOwnerReview";
 import Analytic from "./components/Reviews/Analytics";
 import CouponCreation from "./components/CreateProduct/CouponCreation";
@@ -24,18 +26,14 @@ import Product1 from "./components/productcatalogue/Product1";
 import data from "./data";
 import Contactus from "./components/Footer/Contact";
 import Aboutus from "./components/Footer/Aboutus";
-import 'react-toastify/dist/ReactToastify.css';
-import Verifyaccount from "./components/useraccount/VerifyAccount";
-import { ToastContainer } from 'react-toastify';
-import Authenticator from "./components/Authenticator/Authenticator";
-import UnAuthenticatedRoute from "./components/Authenticator/UnAuthenticatedRoute";
-import ResetPassword from "./components/useraccount/ResetPassword";
-
-
 
 function App() {
   const { products } = data;
   const [cartItems, setCartItems] = useState([]);
+
+  localStorage.setItem('username', 'Rushi Patel');
+
+  const username = localStorage.getItem('username');
 
   const onAdd = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
@@ -63,102 +61,94 @@ function App() {
   };
   return (
     <div>
-
-      <ToastContainer />
       {/* <header className="App-header"></header> */}
 
-      <BrowserRouter>
+      <BrowserRouter >
         <Header countCartItems={cartItems.length} />
         <div className="container">
-
-
           <Routes>
-            <Route path='/' element={<Authenticator/>}>
-              <Route path="/communityforum" element={<Posts />}></Route>
-              <Route path="/userprofile" element={<Profile />}></Route>
-              <Route exact path="/productpage" element={<ProductPage />} />
-              <Route
-                exact
-                path="/addproducts"
-                element={<AddProduct></AddProduct>}
-              />
-              <Route
-                exact
-                path="/editproduct"
-                element={<EditProduct></EditProduct>}
-              ></Route>
-              <Route
-                exact
-                path="/deleteproduct"
-                element={<DeleteProduct></DeleteProduct>}
-              ></Route>
-              <Route
-                exact
-                path="/createcoupon"
-                element={<CouponCreation></CouponCreation>}
-              />
-              <Route exact path="/productreviews" element={<ProductReviews />} />
-              <Route
-                exact
-                path="/MainBillingPage"
-                element={<MainBillingPage />}
-              />
-              <Route
-                exact
-                path="/createproductreview"
-                element={<CreateProductReview />}
-              />
-              <Route
-                exact
-                path="/createownerreview"
-                element={<CreateOwnerReview />}
-              />
-              <Route
-                exact
-                path="/products"
-                element={
-                  <div className="row">
-                    <Main products={products} onAdd={onAdd}></Main>
-                  </div>
-                }
-              ></Route>
-              <Route
-                exact
-                path="/product/:id"
-                element={
-                  <div className="row">
-                    <Product1 products={products} onAdd={onAdd}></Product1>
-                  </div>
-                }
-              ></Route>
-              <Route
-                exact
-                path="/cart"
-                element={
-                  <Cart
-                    className="block"
-                    cartItems={cartItems}
-                    onAdd={onAdd}
-                    onRemove={onRemove}
-                  ></Cart>
-                }
-              />
-            </Route>
-          </Routes>
-
-
-          <Routes>
-            <Route path='/' element={<UnAuthenticatedRoute restrictedToPublicOnly={true} />} >
-              <Route path="/" element={<Signin />}></Route>
-              <Route path="/signup" element={<Signup />}></Route>
-              <Route path="/signin" element={<Signin />}></Route>
-              <Route path="/forgetpswd" element={<Forgetpswd />}></Route>
-              <Route exact path="/verifyaccount/:id" element={<Verifyaccount />} />
-              <Route exact path="/analytic" element={<Analytic />} />
-              <Route exact path="/contactus" element={<Contactus />} />
-              <Route exact path="/aboutus" element={<Aboutus />} />
-              <Route exact path="/resetpassword/:token" element={<ResetPassword/>} />
-            </Route>
+            <Route path="/" element={<Signup />}></Route>
+            <Route path="/signup" element={<Signup />}></Route>
+            <Route path="/signin" element={<Signin />}></Route>
+            <Route path="/forgetpswd" element={<Forgetpswd />}></Route>
+            <Route path="/communityforum" element={<Posts />}></Route>
+            <Route path="/userprofile" element={<Profile />}></Route>
+            <Route exact path="/productpage" element={<ProductPage />} />
+            <Route
+              exact
+              path="/addproducts"
+              element={<AddProduct></AddProduct>}
+            />
+            <Route
+              exact
+              path="/editproduct"
+              element={<EditProduct></EditProduct>}
+            ></Route>
+            <Route
+              exact
+              path="/deleteproduct"
+              element={<DeleteProduct></DeleteProduct>}
+            ></Route>
+            <Route
+              exact
+              path="/createcoupon"
+              element={<CouponCreation></CouponCreation>}
+            />
+            <Route exact path="/review/:id" element={<ProductReviews />} />
+            <Route exact path="/review/owner/:id" element={<PostedOwnerReviews />}/>
+            <Route
+              exact
+              path="/MainBillingPage"
+              element={<MainBillingPage />}
+            />
+            <Route
+              exact
+              path="/product/:id/review/createproductreview"
+              element={<CreateProductReview />}
+            />
+            <Route
+              exact
+              path="/product/:id/review/updateproductreview"
+              element={<UpdateProductReview />}
+            />
+            <Route
+              exact
+              path="/product/:id/review/createownerreview"
+              element={<CreateOwnerReview />}
+            />
+            <Route exact path="/analytic" element={<Analytic />} />
+            <Route
+              exact
+              path="/products"
+              element={
+                <div className="row">
+                  <Main products={products} onAdd={onAdd}></Main>
+                </div>
+              }
+            ></Route>
+            <Route
+              exact
+              path="/product/:id"
+              element={
+                <div className="row">
+                  <Product1 products={products} onAdd={onAdd}></Product1>
+                </div>
+              }
+            ></Route>
+            <Route
+              exact
+              path="/cart"
+              element={
+                <Cart
+                  className="block"
+                  cartItems={cartItems}
+                  onAdd={onAdd}
+                  onRemove={onRemove}
+                ></Cart>
+              }
+            />
+            <Route exact path="/contactus" element={<Contactus />} />
+            <Route exact path="/aboutus" element={<Aboutus />} />
           </Routes>
         </div>
       </BrowserRouter>

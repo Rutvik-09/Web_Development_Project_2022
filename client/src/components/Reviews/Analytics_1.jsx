@@ -10,7 +10,7 @@ import {
 import { Animation } from "@devexpress/dx-react-chart";
 
 const data = [
-  { year: "1950", population: 2.525 },
+  { year: "1951", population: 2.525 },
   { year: "1960", population: 3.018 },
   { year: "1970", population: 3.682 },
   { year: "1980", population: 4.44 },
