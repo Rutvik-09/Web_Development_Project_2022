@@ -11,15 +11,16 @@ const createPost= async (req, res)=>{
 const postDetails = req.body.postData;
 let postId = Math.random().toString().substring(2, 8);
 
-let yourDate = new Date()
-let todaysDate = yourDate.toISOString().split('T')[0]
+// let yourDate = new Date()
+// let todaysDate = yourDate.toISOString().split('T')[0]
 
 try{
 
     await postsModel.create({
         _id: postId,
         category: postDetails.category,
-        date: todaysDate,
+        userId: postDetails.userId,
+        // date: todaysDate,
         description: postDetails.description,
         fullname: postDetails.fullname
     });
@@ -112,5 +113,67 @@ const viewPosts= async (req,res)=>{
     
 }
 
+const filterPostsByDate = async (req,res)=>{
+    try{
+        let posts = await postsModel.find().sort({date: -1});
+        res.status(200).json({
+            viewPosts: true,
+            data: posts
+        });
 
-module.exports={createPost,updatePost,deletePost,viewPosts};
+
+    } catch (err){
+        console.log(err);
+
+        res.status(400).json({
+            filterByDate: false,
+            message: "Error while filtering posts by date"
+        });
+    }
+}
+
+const filterPostsByCategory = async (req,res)=>{
+    
+    var query = { category: req.body.category.toLowerCase() };
+    
+    try{
+        console.log(query);
+        let categoryPosts = await postsModel.find(query);
+        res.status(200).json({
+            viewPosts: true,
+            data: categoryPosts
+        });
+    } catch (err){
+        console.log(err);
+
+        res.status(400).json({
+            filterByDate: false,
+            message: "Error while filtering posts by category"
+        });
+    }
+}
+
+const filterPostsByMyPosts = async (req,res)=>{
+    var query = { userId: req.body.userId };
+    
+    try{
+        console.log(query);
+        let categoryPosts = await postsModel.find(query);
+        
+        res.status(200).json({
+            viewPosts: true,
+            data: categoryPosts
+        });
+    } catch (err){
+        console.log(err);
+
+        res.status(400).json({
+            filterByDate: false,
+            message: "Error while filtering posts by category"
+        });
+    }
+    
+}
+
+
+module.exports={createPost,updatePost,deletePost,viewPosts,filterPostsByDate,filterPostsByCategory,filterPostsByMyPosts};

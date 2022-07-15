@@ -27,6 +27,8 @@ function Posts() {
   const classes = useStyles();
   let navigate = useNavigate();
   const moment = require('moment');
+  const[filteValue,setFilterValue] = useState("");
+  const[categoryOpen, setCategoryOpen] = useState(false);
 
   const [posts, setPosts] = useState([]);
   const [category, setCategory] = useState("");
@@ -44,11 +46,76 @@ function Posts() {
     setOpen(true);
   };
 
+  const closeCategoryDialog = () => {
+    setCategoryOpen(false);
+  }
+  useEffect(() => {
+    axios
+      .get(constant.BE_URL + "viewPosts")
+      .then((response) => {
+        setPosts(response.data.data);
+      }).catch((err) => {
+        console.log(err)
+      });
+  },[]);
+
+  const submitCategoryFilter = (e) => {
+    e.preventDefault();
+    setCategoryOpen(false);
+    axios
+    .post(constant.BE_URL + "filterPostsByCategory", {category:category.toLowerCase()})
+    .then((response) => {
+      console.log(response.data.data)
+      setPosts(response.data.data);
+    }).catch((err) => {
+      console.log(err)
+    });
+  }
+
+  const handleFilter = (event) => {
+    setFilterValue(event.target.value);
+    let filter = event.target.value;
+
+    if(filter == 20){
+      axios
+      .post(constant.BE_URL + "filterPostsByMyPosts",{userId:"hardcodeID"})
+      .then((response) => {
+        setPosts(response.data.data);
+      }).catch((err) => {
+        console.log(err)
+      });
+
+    } else if(filter == 30){
+      axios
+      .post(constant.BE_URL + "filterPostsByDate")
+      .then((response) => {
+        setPosts(response.data.data);
+      }).catch((err) => {
+        console.log(err)
+      });
+    } else if (filter == 40){
+      setCategoryOpen(true);
+      
+    }
+    else{
+      axios
+      .get(constant.BE_URL + "viewPosts")
+      .then((response) => {
+        setPosts(response.data.data);
+      }).catch((err) => {
+        console.log(err)
+      });
+
+    }
+    
+  }
+
   const handleClose = () => {
     setOpen(false);
 
     axios.post(constant.BE_URL + "createPost", {
       postData:{category:category,
+        userId:"hardcodeID",
         description:description,
         fullname:"Hardcode name"}
       
@@ -63,6 +130,7 @@ function Posts() {
     });
   };
 
+
   const handleChange = (newValue) => {
     setValue(newValue);
   };
@@ -76,19 +144,10 @@ function Posts() {
     //const initials = fullName[0]+fullName[1];
     const initials = fullName.shift().charAt(0) + fullName.pop().charAt(0);
     return initials.toUpperCase();
-
     
   }
 
-  useEffect(() => {
-    axios
-      .get(constant.BE_URL + "viewPosts")
-      .then((response) => {
-        setPosts(response.data.data);
-      }).catch((err) => {
-        console.log(err)
-      });
-  },[]);
+  
 
   return (
     <div>
@@ -127,6 +186,7 @@ function Posts() {
           >
             Create
           </Button>
+
           {/* Referenced from: https://mui.com/material-ui/react-dialog/ */}
           <Dialog open={open} onClose={handleClose}>
             <DialogTitle>Create Post</DialogTitle>
@@ -146,7 +206,7 @@ function Posts() {
                   fullWidth
                   variant="outlined"
                   onChange={(event) => {
-                    setCategory(event.target.value);
+                    setCategory(event.target.value.toLowerCase());
                   }}
                 />
                 {/* <TextField
@@ -186,6 +246,35 @@ function Posts() {
             </form>
           </Dialog>
 
+          <Dialog open={categoryOpen} onClose={closeCategoryDialog}>
+            <DialogTitle>Category</DialogTitle>
+            <form onSubmit={submitCategoryFilter}>
+              <DialogContent>
+                <DialogContentText>
+                    Please enter the category for which you want to view the posts:
+                </DialogContentText>
+                <TextField
+                  autoFocus
+                  required
+                  margin="dense"
+                  id="category"
+                  label="Category"
+                  fullWidth
+                  variant="outlined"
+                  onChange={(event) => {
+                    setCategory(event.target.value);
+                  }}
+                />
+                 <DialogActions>
+                <Button onClick={closeCategoryDialog}>Cancel</Button>
+                <Button onSubmit={submitCategoryFilter} onClick={submitCategoryFilter} type="submit">
+                  Submit
+                </Button>
+              </DialogActions>
+                </DialogContent>
+                </form>
+                </Dialog>
+
           <div className={classes.filter}>
             {/* <Box sx={{ minWidth: 120 }}> */}
             <FormControl fullWidth>
@@ -193,11 +282,11 @@ function Posts() {
                 Filter
               </InputLabel>
               {/* Referenced from: https://mui.com/material-ui/react-select/ */}
-              <NativeSelect defaultValue={10}>
+              <NativeSelect onChange={handleFilter} value={filteValue}>
                 <option value={10}>Select</option>
-                <option value={20}>My posts</option>
-                <option value={30}>Date</option>
-                <option value={40}>Category</option>
+                <option value={20} >My posts</option>
+                <option value={30} >Date</option>
+                <option value={40} >Category</option>
               </NativeSelect>
             </FormControl>
             {/* </Box/> */}
@@ -206,6 +295,7 @@ function Posts() {
           {/* </div> */}
         </div>
         {/* Referenced from https://mui.com/material-ui/react-grid/ */}
+        {posts.length >0 ? (
         <Grid container spacing={2}>
           {posts.map(post => (
             <Grid item xs={12} md={12}>
@@ -216,10 +306,11 @@ function Posts() {
               category={post.category}
               desc={post.description}
               id={post._id}
+              userId={post.userId}
             ></Post>
           </Grid>
           ))}
-          </Grid>
+          </Grid>) : <h2 className={classes.headerCenter}>No posts found</h2>}
           {/* <Grid item>
             <Post
               name="Rushi Patel"

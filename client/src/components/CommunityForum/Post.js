@@ -136,7 +136,7 @@ function Post(props) {
           </div>
 
           {/* Referenced from: https://mui.com/material-ui/icons/ */}
-          {props.name == "Rushi Patel" ? (
+          {props.userId == "hardcodeID" ? (
           <IconButton
           aria-label="more"
           id="long-button"

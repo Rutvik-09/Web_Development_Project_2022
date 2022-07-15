@@ -10,8 +10,9 @@ const mongoose = require("mongoose")
 
  const collection = mongoose.Schema({
     _id: { type: String },
+    userId:{type:String},
     category: { type: String, required: true },
-    date: { type: Date, required: true },
+    date: { type: Date, required: true, default: Date.now },
     description: { type: String, required: true },
     fullname: {type:String, required: true }
   },

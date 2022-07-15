@@ -7,7 +7,7 @@
  const express=require("express");
 
  const authenticateUser=require("../Middleware/authenticate.js");
- const {createPost,updatePost,deletePost,viewPosts}=require("../Controller/postsController.js");
+ const {createPost,updatePost,deletePost,viewPosts,filterPostsByDate,filterPostsByCategory,filterPostsByMyPosts}=require("../Controller/postsController.js");
  
  const postsRouter = express.Router();
  
@@ -16,5 +16,8 @@
  postsRouter.post('/updatePost', updatePost);
  postsRouter.post('/deletePost', deletePost);
  postsRouter.get('/viewPosts', viewPosts);
+ postsRouter.post('/filterPostsByDate', filterPostsByDate);
+ postsRouter.post('/filterPostsByCategory', filterPostsByCategory);
+ postsRouter.post('/filterPostsByMyPosts', filterPostsByMyPosts);
  
  module.exports=postsRouter;
