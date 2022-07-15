@@ -379,3 +379,4 @@ module.exports = {
     sendResetPasswordLink,
     resetPassword
 };
+4

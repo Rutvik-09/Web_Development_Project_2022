@@ -1,18 +1,19 @@
 //Code has been refered form this url https://nodemailer.com/about/
 
 /**
- *   @author : Vasu Gamdha (B00874162)
+ *   @author : Rushi Patel (B00886157)
  *   @description:Set email configuration to send an email from gmail account
  */
 
-const emailConfig = require("nodemailer");
+ const emailConfig = require("nodemailer");
 
-const emailSender = emailConfig.createTransport({
-    service: "gmail",
-    auth: {
-      user: "patelvivek221996@gmail.com",
-      pass: "vaxpnnyqgryclnxj",
-    },
-  });
-
-  module.exports=emailSender;
+ const emailSender = emailConfig.createTransport({
+     service: "gmail",
+     auth: {
+       user: "takeonrent95@gmail.com",
+       pass: "kxrwwbmhukpjpydf",
+     },
+   });
+ 
+   module.exports=emailSender;
+ 
