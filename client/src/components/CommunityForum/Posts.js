@@ -42,10 +42,11 @@ function Posts() {
 
   const [open, setOpen] = React.useState(false);
 
-  localStorage.setItem('userid','hardcodeID');
+  //localStorage.setItem('userid','hardcodeID');
   let id = localStorage.getItem("userid");
-  localStorage.setItem('fullname','Hardcode name');
-  let name = localStorage.getItem("fullname");
+  //localStorage.setItem('fullname','Hardcode name');
+  let fullname1= localStorage.getItem('firstname')+" "+localStorage.getItem('lastname');
+  //let name = localStorage.getItem("fullname");
     
     
 
@@ -127,7 +128,7 @@ function Posts() {
       postData:{category:category,
         userId:id,
         description:description,
-        fullname:name}
+        fullname:fullname1}
       
     })
     .then(function (response) {
@@ -150,9 +151,13 @@ function Posts() {
     // Referred from: https://www.codegrepper.com/code-examples/javascript/get+initials+from+name+javascript
 
     console.log(name);
-    const fullName = name.split(" ");
+  
+    let firstname = localStorage.getItem("firstname");
+    let lastname = localStorage.getItem("lastname");
     //const initials = fullName[0]+fullName[1];
-    const initials = fullName.shift().charAt(0) + fullName.pop().charAt(0);
+    //const initials = fullName.shift().charAt(0) + fullName.pop().charAt(0);
+    const initials = firstname.charAt(0) + lastname.charAt(0);
+    console.log(initials);
     return initials.toUpperCase();
     
   }

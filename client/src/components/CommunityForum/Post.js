@@ -39,10 +39,10 @@ function Post(props) {
 
   const [deleteOpen, setDeleteOpen] = React.useState(false);
 
-  localStorage.setItem('userid','hardcodeID');
+  //localStorage.setItem('userid','hardcodeID');
   let id = localStorage.getItem("userid");
-  localStorage.setItem('fullname','Hardcode name');
-  let name = localStorage.getItem("fullname");
+  //localStorage.setItem('fullname','Hardcode name');
+  let name = localStorage.getItem("username");
 
   const handleClickDeleteOpen = () => {
     setDeleteOpen(true);

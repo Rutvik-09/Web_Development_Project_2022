@@ -27,7 +27,8 @@ const Signin = () => {
           if (response.data.userLogin) {
             localStorage.setItem("token",response.data.token);
             localStorage.setItem("userid",response.data.userDetails.useId);
-            localStorage.setItem("username",response.data.userDetails.firstName+response.data.userDetails.lastName);
+            localStorage.setItem("firstname",response.data.userDetails.firstName);
+            localStorage.setItem("lastname",response.data.userDetails.lastName);
             console.log("userdata");
              localStorage.setItem("userdetails",response.data.userDetails);
             toast.success(response.data.message);
