@@ -11,22 +11,8 @@ import useStyles from "./Style";
 import { useNavigate } from "react-router-dom";
 import constant from "../../AppConstant.json";
 
-function PostedReviews() {
-  let navigate = useNavigate();
+function PostedOwnerReviews() {
   const [reviewList, setReviewList] = useState([]);
-
-  const deleteReview = (id) => {
-    axios.delete(constant.BE_URL+`review/${id}`);
-    window.location.reload();
-  };
-
-
-  const updateReview = (id) => {
-    navigate(`/product/${id}/review/updateproductreview`);
-    window.location.reload();
-
-  };
-
 
   useEffect(() => {
 
@@ -34,7 +20,7 @@ function PostedReviews() {
 
     const username = localStorage.getItem('username');
 
-    axios.get(constant.BE_URL+`review/${username}`).then((response) => {
+    axios.get(constant.BE_URL+`review/owner/${username}`).then((response) => {
       setReviewList(response.data);
     });
   }, []);
@@ -43,7 +29,7 @@ function PostedReviews() {
     <div>
       <Container>
         <div className="all-posted-reviews-heading">
-          <h1>All Posted Reviews</h1>
+          <h1>Posted Reviews for Owner  </h1>
         </div>
 
         {reviewList.map((review) => (
@@ -62,19 +48,6 @@ function PostedReviews() {
                     rating={review.reviewRating}
                     desc={review.reviewDescription}
                   ></Review>
-                  <Button
-                    style={{
-                      marginBottom: "15px",
-                    }}
-                    onClick={() => deleteReview(review._id)}
-                  >
-                    Delete
-                  </Button>
-                  <Button style={{
-                      marginBottom: "15px",
-                    }} onClick={() => updateReview(review._id)}>
-                    Update
-                  </Button>
                 </Grid>
               </Grid>
             </Card>
@@ -85,4 +58,4 @@ function PostedReviews() {
   );
 }
 
-export default PostedReviews;
+export default PostedOwnerReviews;

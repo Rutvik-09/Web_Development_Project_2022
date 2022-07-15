@@ -1,51 +1,16 @@
 import "./Signin.css";
 import rentimage from "../../assets/images/HomeGlobeIcon.jpg";
-import { Formik, Form } from "formik";
+import { Formik,Form } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import constant from "../../AppConstant.json";
-import axios from "axios";
 
 const Signin = () => {
 
   const navigate = useNavigate();
-  //Get form values once form is submitted
-  const signinForm = (formValues) => {
-
-
-
-    const bodyData = {signindata: {email:formValues.email,password:formValues.password}}
-
-
-    console.log("Making post request");
-    console.log(bodyData);
-    axios.post(constant.BE_URL + "userdetails/signin", bodyData)
-      .then(
-        response => {
-          if (response.data.userLogin) {
-            localStorage.setItem("token",response.data.token);
-            localStorage.setItem("userid",response.data.userDetails.useId);
-            localStorage.setItem("firstname",response.data.userDetails.firstName);
-            localStorage.setItem("lastname",response.data.userDetails.lastName);
-            localStorage.setItem("emailAddress",response.data.userDetails.emailAddress);
-            console.log("userdata");
-             localStorage.setItem("userdetails",response.data.userDetails);
-            toast.success(response.data.message);
-            
-            //navigate("/userprofile");
-            window.location.href = '/userprofile';
-          } else {
-            toast.error(response.data.message);
-          }
-        }
-      )
-      .catch(error => {
-        console.error('There was an error!', error);
-        toast.error("Error while login into useraccount");
-      });
-  };
+//Get form values once form is submitted
+const signinForm = (formValues) => {
+  navigate("/products");
+};
 
 
   return (
@@ -103,8 +68,8 @@ const Signin = () => {
                 </div>
 
                 <div className="d-grid">
-
-                  <center><button
+                  
+                <center><button
                     type="submit"
                     className="btn btn-secondary"
                     disabled={!(dirty && isValid)}
@@ -116,10 +81,10 @@ const Signin = () => {
                   <center><a href="/forgetpswd">Foget password?</a></center>
                 </p>
               </Form>
-            </div>
+              </div>
 
-            {/* rent image has been taken from the "https://www.freepik.com/free-vector/renting-electronic-device-renting-electronics-website-new-device-rent-terms-use-conditions-gadget-rental-test-equipment-lease_13450501.htm#query=equipment%20rental&position=12&from_view=search" */}
-            <div className="col-md-6">
+{/* rent image has been taken from the "https://www.freepik.com/free-vector/renting-electronic-device-renting-electronics-website-new-device-rent-terms-use-conditions-gadget-rental-test-equipment-lease_13450501.htm#query=equipment%20rental&position=12&from_view=search" */}
+              <div className="col-md-6">
               <img src={rentimage} width="111.5%" />
             </div>
           </div>
@@ -134,18 +99,18 @@ const Signin = () => {
 
 const SigninFormValidation = Yup.object().shape({
 
-  email: Yup.string().email("Invalid Email").required("Email is required"),
-
-  password: Yup.string().required("Password is required")
-
+    email: Yup.string().email("Invalid Email").required("Email is required"),
+  
+    password: Yup.string().required("Password is required")
+  
 });
 
 
 
 const defaultValues = {
-  email: "",
-  password: "",
-};
+    email: "",
+    password: "",
+  };
 
 
 export default Signin;
