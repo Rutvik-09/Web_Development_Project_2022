@@ -3,7 +3,7 @@
  *   @description: messagingController handles business logic related to sending email to the owner of the product.
  */
 
- const composeEmail = require("../mail/mailFormat.json");
+ const composeEmail = require("../mail/notificationMail.json");
  const emailSender = require("../mail/emailConfig");
  
 

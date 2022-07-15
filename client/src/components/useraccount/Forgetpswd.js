@@ -3,6 +3,10 @@ import rentimage from "../../assets/images/HomeGlobeIcon.jpg";
 import { Formik,Form } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import constant from "../../AppConstant.json";
+import axios from "axios";
 
 const Forgetpswd = () => {
 
@@ -10,7 +14,27 @@ const Forgetpswd = () => {
 
 //Get form values once form is submitted
 const forgetpswdForm = (formValues) => {
-  navigate("/signup");
+
+
+  const bodyData = {email:formValues.email}
+
+  console.log(bodyData);
+
+    axios.post(constant.BE_URL + "userdetails/sendResetPasswordLink", bodyData)
+      .then(
+        response => {
+          if (response.data.linkSend) {
+            toast.success(response.data.message);
+            navigate("/signup");
+          } else {
+            toast.error(response.data.message);
+          }
+        }
+      )
+      .catch(error => {
+        console.error('There was an error!', error);
+        toast.error("Error while sending reset password link");
+      });
 };
 
   return (
@@ -39,7 +63,7 @@ const forgetpswdForm = (formValues) => {
                 <div className="mb-3">
                   <label>Email address</label>
                   <input
-                    type="text"
+                    type="email"
                     className="form-control"
                     placeholder="Enter email"
                     name="email"
@@ -83,7 +107,7 @@ const forgetpswdForm = (formValues) => {
 
 const ResetpswdFormValidation = Yup.object().shape({
 
-    email: Yup.string().email("Invalid Email").required("Email is required"),
+    email: Yup.string().email("Invalid Email").required("Email is required")
   
 });
 
