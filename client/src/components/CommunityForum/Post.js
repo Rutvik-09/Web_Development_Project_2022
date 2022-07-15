@@ -39,6 +39,11 @@ function Post(props) {
 
   const [deleteOpen, setDeleteOpen] = React.useState(false);
 
+  localStorage.setItem('userid','hardcodeID');
+  let id = localStorage.getItem("userid");
+  localStorage.setItem('fullname','Hardcode name');
+  let name = localStorage.getItem("fullname");
+
   const handleClickDeleteOpen = () => {
     setDeleteOpen(true);
   };
@@ -136,7 +141,7 @@ function Post(props) {
           </div>
 
           {/* Referenced from: https://mui.com/material-ui/icons/ */}
-          {props.userId == "hardcodeID" ? (
+          {props.userId == id ? (
           <IconButton
           aria-label="more"
           id="long-button"

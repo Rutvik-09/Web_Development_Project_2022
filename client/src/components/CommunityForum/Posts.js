@@ -42,6 +42,13 @@ function Posts() {
 
   const [open, setOpen] = React.useState(false);
 
+  localStorage.setItem('userid','hardcodeID');
+  let id = localStorage.getItem("userid");
+  localStorage.setItem('fullname','Hardcode name');
+  let name = localStorage.getItem("fullname");
+    
+    
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -75,10 +82,11 @@ function Posts() {
   const handleFilter = (event) => {
     setFilterValue(event.target.value);
     let filter = event.target.value;
+    
 
     if(filter == 20){
       axios
-      .post(constant.BE_URL + "filterPostsByMyPosts",{userId:"hardcodeID"})
+      .post(constant.BE_URL + "filterPostsByMyPosts",{userId:id})
       .then((response) => {
         setPosts(response.data.data);
       }).catch((err) => {
@@ -112,12 +120,14 @@ function Posts() {
 
   const handleClose = () => {
     setOpen(false);
+    
+    
 
     axios.post(constant.BE_URL + "createPost", {
       postData:{category:category,
-        userId:"hardcodeID",
+        userId:id,
         description:description,
-        fullname:"Hardcode name"}
+        fullname:name}
       
     })
     .then(function (response) {
