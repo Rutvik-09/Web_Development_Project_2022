@@ -10,9 +10,9 @@
 const sendEmailToOwner= async (req, res)=>{
     const emailData = req.body.data;
     //emailData= toEmail,ccEmail,Subject,Description
-
+    console.log(emailData);
     try{
-        composeEmail.to = emailData.toEmail;
+        composeEmail.to = emailData.toEmail;  
         composeEmail.cc = emailData.ccEmail;
         composeEmail.subject = emailData.subject;
         composeEmail.html = emailData.description;
