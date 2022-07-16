@@ -4,15 +4,36 @@ import { Formik,Form } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import "./Contact.css";
+import React from "react";
+import axios from "axios";
+import constant from "../../AppConstant.json";
 
 const Contactus = () => {
   
     const navigate = useNavigate();
   
-  
     //Get form values once form is submitted
   const contactForm = (formValues) => {
     console.log("form values are "+formValues);
+  
+    axios
+            .post(constant.BE_URL +"contactUsEmail", {
+              data: {
+                email: formValues.email,
+                subject: "QueryDetails",
+                address: formValues.address
+              },
+            })
+            .then(function (response) {
+              console.log(response);
+              // window.location.reload();
+              // localStorage.setItem("email",email)
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+
+
     navigate("/signup");
   };
     return (
