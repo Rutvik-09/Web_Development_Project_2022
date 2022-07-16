@@ -14,6 +14,12 @@ const messagingRoutes=require("./Routes/messagingRoutes.js")
 const PORT = process.env.PORT || 8080;
 
 
+const reviewsRouter = require('./Routes/reviews');
+const productsRouter = require('./Routes/products');
+
+
+
+
 app.use(express.json());
 app.use(cors());
 
@@ -24,6 +30,8 @@ const appParent="/unitedrental/";
 app.use(appParent + "userdetails", userRouter);
 app.use(appParent, postsRoutes);
 app.use(appParent, messagingRoutes);
+app.use(appParent+'review', reviewsRouter);
+app.use(appParent+'product', productsRouter);
 
 
 app.get("/", (req, res) => {

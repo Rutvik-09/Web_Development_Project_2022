@@ -6,18 +6,18 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import constant from "../../AppConstant.json";
 
-function CreateProductReview() {
+function UpdateProductReview() {
   const navigate = useNavigate();
   const [reviewRating, setReviewRating] = useState();
   const [reviewTitle, setReviewTitle] = useState("");
   const [reviewDescription, setReviewDescription] = useState("")
+
   const [reviewList, setReviewList] = useState([]);
 
   const {id} = useParams()
 
  const onSubmit=()=>{
-
-     const username = localStorage.getItem('firstname')+" "+localStorage.getItem('lastname');
+      const username = localStorage.getItem('firstname')+" "+localStorage.getItem('lastname');
 
   navigate(`/review/${username}`);
   window.location.reload();
@@ -30,28 +30,29 @@ function CreateProductReview() {
   }
   console.log(review);
 
-  axios.post(constant.BE_URL+`product/${id}/review/createproductreview`, review,)
+  axios.put(constant.BE_URL+`product/${id}/review/updateproductreview`, review,)
   .then(res => console.log(res.data))
  }
 
  useEffect(() => {
-  axios.get(constant.BE_URL+`product/${id}`).then((response) => {
-    setReviewList(response.data);
-  });
-}, []);
-
+    axios.get(constant.BE_URL+`product/find/${id}`).then((response) => {
+      setReviewList(response.data);
+    });
+  }, []);
 
   return (
     <div>
+    
       <MDBContainer>
           <div className="cerate-review-product">
-            <h1>Create Product Review</h1>
+            <h1>Update Product Review</h1>
           </div>
         <hr></hr>
         <MDBRow>
           <MDBCol lg="3" md="2"></MDBCol>
           <MDBCol lg="6" md="8">
             <div className="product-heading">
+              
             </div>
             <div className="star-rating">
               <p>Overall Rating</p>
@@ -77,14 +78,16 @@ function CreateProductReview() {
             </div>
 
             <div className="input">
-              <MDBInput type="input" outline size="lg" value={reviewTitle} onChange={(e) => setReviewTitle(e.target.value)} required/>
+              <MDBInput type="input"
+              
+               outline size="lg" value={reviewTitle} onChange={(e) => setReviewTitle(e.target.value)}/>
             </div>
 
             <div className="add-review">
               <h2>Add Written Review</h2>
             </div>
             <div className="input">
-              <MDBInput type="textarea" outline value={reviewDescription} onChange={(e) => setReviewDescription(e.target.value)} required/>
+              <MDBInput type="textarea" outline placeholder={reviewList.map((review) => (review.reviewDescription))} value={reviewDescription} onChange={(e) => setReviewDescription(e.target.value)} />
             </div>
               <div class="submit-button">
                 <button
@@ -99,8 +102,9 @@ function CreateProductReview() {
           </MDBCol>
         </MDBRow>
       </MDBContainer>
+
     </div>
   );
 }
 
-export default CreateProductReview;
+export default UpdateProductReview;

@@ -5,6 +5,7 @@ import { ProgressBar } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import "../Reviews/ProductPage";
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
+import axios from "axios";
 
 function ProductPage() {
   let navigate = useNavigate();
@@ -103,7 +104,7 @@ function ProductPage() {
               <button
               className="btn"
                 onClick={() => {
-                  navigate("/createproductreview");
+                  navigate("/products/1/reviews/createproductreview");
                 }}
               >
                 <h5>Write a product review</h5>
